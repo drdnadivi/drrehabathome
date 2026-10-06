@@ -1,0 +1,551 @@
+{
+  "users": [
+    {
+      "id": "usr-admin-1",
+      "email": "admin@physiopmr.com",
+      "password": "admin123password",
+      "name": "Dr. Sameer Verma",
+      "role": "admin",
+      "title": "Clinical Operations Director",
+      "avatar": "https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=256&q=80"
+    },
+    {
+      "id": "usr-doc-1",
+      "email": "doctor@physiopmr.com",
+      "password": "doctor123password",
+      "name": "Dr. Dharshan N A, MD (PMR)",
+      "role": "doctor",
+      "title": "Lead PMR Specialist (Physiatrist)",
+      "credentials": "MD (PMR), DNB, Fellowship in Neurological Rehabilitation",
+      "registrationNo": "MCI-PMR-84920",
+      "avatar": "/dr-dharshan.jpg",
+      "bio": "Physiatrist with 14+ years directing neuro & orthopedic rehabilitation pathways. Former Senior Resident at AIIMS Rehabilitation Medicine."
+    },
+    {
+      "id": "usr-staff-1",
+      "email": "staff@physiopmr.com",
+      "password": "staff123password",
+      "name": "PT Rahul Sharma, MPT",
+      "role": "staff",
+      "title": "Senior Home Physiotherapist",
+      "credentials": "MPT (Musculoskeletal & Sports), BPT, Certified Dry Needling",
+      "registrationNo": "IAP-L-45812",
+      "avatar": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=256&q=80",
+      "assignedZone": "South & East Suburbs"
+    },
+    {
+      "id": "usr-pat-1",
+      "email": "patient@physiopmr.com",
+      "password": "patient123password",
+      "name": "Rajesh Mehta",
+      "role": "patient",
+      "patientId": "pat-101",
+      "phone": "+91 98201 45872",
+      "age": 62,
+      "gender": "Male",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=256&q=80"
+    }
+  ],
+  "patients": [
+    {
+      "id": "pat-101",
+      "name": "Rajesh Mehta",
+      "age": 62,
+      "gender": "Male",
+      "phone": "+91 98201 45872",
+      "email": "patient@physiopmr.com",
+      "address": "402 Palm Heights, Sector 14, Indiranagar",
+      "diagnosis": "Post-Operative Right Total Knee Arthroplasty (TKA)",
+      "surgeryDate": "2026-09-08",
+      "postOpDay": 18,
+      "primarySurgeon": "Dr. K. S. Murthy (Orthopedics)",
+      "assignedDoctor": "Dr. Dharshan N A, MD (PMR)",
+      "assignedTherapist": "PT Rahul Sharma, MPT",
+      "status": "Active Recovery",
+      "recoveryScore": 76,
+      "targetROM": "0\u00b0 Extension / 115\u00b0 Flexion",
+      "currentROM": "3\u00b0 Extension / 98\u00b0 Flexion",
+      "baselineVAS": 8,
+      "currentVAS": 3,
+      "totalSessionsPlanned": 20,
+      "sessionsCompleted": 9,
+      "clinicalGoals": [
+        "Achieve >= 105\u00b0 active knee flexion without compensatory hip hiking",
+        "Full active terminal knee extension (0\u00b0)",
+        "Wean off single-point stick for indoor ambulation by Day 24",
+        "Normalize gait cadence and stair ascent with reciprocal stepping"
+      ]
+    },
+    {
+      "id": "pat-102",
+      "name": "Sunita Kapoor",
+      "age": 68,
+      "gender": "Female",
+      "phone": "+91 98450 11299",
+      "email": "sunita.k@example.com",
+      "address": "12 Lotus Enclave, 5th Main, Koramangala",
+      "diagnosis": "Right Middle Cerebral Artery (MCA) Stroke - Left Hemiparesis",
+      "surgeryDate": "2026-08-15",
+      "postOpDay": 42,
+      "primarySurgeon": "Dr. V. Nambiar (Neurology)",
+      "assignedDoctor": "Dr. Dharshan N A, MD (PMR)",
+      "assignedTherapist": "PT Rahul Sharma, MPT",
+      "status": "Active Recovery",
+      "recoveryScore": 64,
+      "targetROM": "Normal Upper/Lower Limb Synergy Control",
+      "currentROM": "Brunnstrom Stage 4 Lower Limb, Stage 3 Upper Limb",
+      "baselineVAS": 6,
+      "currentVAS": 2,
+      "totalSessionsPlanned": 36,
+      "sessionsCompleted": 18,
+      "clinicalGoals": [
+        "Dynamic standing balance without external upper limb support > 60s",
+        "Spasticity management in left gastrocnemius (Modified Ashworth Grade 1+)",
+        "Reach-and-grasp cylindrical object transfer with affected left hand"
+      ]
+    },
+    {
+      "id": "pat-103",
+      "name": "David Chen",
+      "age": 45,
+      "gender": "Male",
+      "phone": "+91 97110 33881",
+      "email": "david.chen@example.com",
+      "address": "B-804 Green Terraces, Outer Ring Road",
+      "diagnosis": "L4-L5 Lumbar Disc Herniation with Right Radiculopathy (Post Microdiscectomy)",
+      "surgeryDate": "2026-08-28",
+      "postOpDay": 29,
+      "primarySurgeon": "Dr. Arvind Joshi (Spine Surgery)",
+      "assignedDoctor": "Dr. Dharshan N A, MD (PMR)",
+      "assignedTherapist": "PT Rahul Sharma, MPT",
+      "status": "Active Recovery",
+      "recoveryScore": 82,
+      "targetROM": "Pain-free Lumbar Extension & Core Endurance > 90s",
+      "currentROM": "Lumbar flexion 60\u00b0, extension 15\u00b0 (mild tight hamstrings)",
+      "baselineVAS": 9,
+      "currentVAS": 2,
+      "totalSessionsPlanned": 15,
+      "sessionsCompleted": 11,
+      "clinicalGoals": [
+        "Neutral spine stabilization under dynamic multi-planar loads",
+        "Eliminate right calf paresthesia during prolonged sitting",
+        "Return to light ergonomic desk work (4 hours/day with sit-stand transitions)"
+      ]
+    }
+  ],
+  "sessions": [
+    {
+      "id": "ses-101-09",
+      "patientId": "pat-101",
+      "patientName": "Rajesh Mehta",
+      "sessionNumber": 9,
+      "date": "2026-09-25",
+      "time": "10:30 AM",
+      "therapistName": "PT Rahul Sharma, MPT",
+      "vitals": {
+        "bp": "128/82 mmHg",
+        "pulse": "74 bpm",
+        "spo2": "99%"
+      },
+      "painScoreVAS": 3,
+      "romMeasurements": {
+        "rightKneeFlexion": "98\u00b0",
+        "rightKneeExtension": "3\u00b0",
+        "quadricepsLag": "0\u00b0"
+      },
+      "exercisesPerformed": [
+        "Seated active-assisted knee flexion with sliding towel (3 sets x 12 reps)",
+        "Short arc quad isometric holding with 1.5 kg cuff weight (3 sets x 10 reps, 5s hold)",
+        "Straight Leg Raise in supine with zero extensor lag (3 sets x 10 reps)",
+        "Weight shift and single-leg balance on balance pad (3 x 45 seconds)",
+        "Stationary mini-cycle pedaling forward and reverse (8 minutes)"
+      ],
+      "functionalMobility": "Ambulated 150m indoors with minimal stick dependency. Step-through gait symmetry noted at 85%.",
+      "therapistNotes": "Patient showed outstanding compliance today. Active knee flexion improved from 92\u00b0 to 98\u00b0. Mild medial joint line tightness after 20 minutes, relieved by ice and myofascial release of vastus medialis.",
+      "pmrDoctorStatus": "pending_review",
+      "pmrDoctorName": "Dr. Dharshan N A, MD (PMR)",
+      "pmrDoctorNotes": "",
+      "pmrDoctorAction": "Awaiting PMR physician clinical verification",
+      "flaggedUrgent": false,
+      "complianceRate": "100%"
+    },
+    {
+      "id": "ses-101-08",
+      "patientId": "pat-101",
+      "patientName": "Rajesh Mehta",
+      "sessionNumber": 8,
+      "date": "2026-09-23",
+      "time": "10:15 AM",
+      "therapistName": "PT Rahul Sharma, MPT",
+      "vitals": {
+        "bp": "130/84 mmHg",
+        "pulse": "76 bpm",
+        "spo2": "98%"
+      },
+      "painScoreVAS": 4,
+      "romMeasurements": {
+        "rightKneeFlexion": "92\u00b0",
+        "rightKneeExtension": "4\u00b0",
+        "quadricepsLag": "2\u00b0"
+      },
+      "exercisesPerformed": [
+        "Prone passive knee flexion with therapist overpressure (3 sets x 30s)",
+        "Terminal Knee Extension with green TheraBand resistance (3 sets x 15 reps)",
+        "Patellar mobilizations (superior, inferior, medial glides Grade III)",
+        "Static cycling with low resistance (6 minutes)"
+      ],
+      "functionalMobility": "Independent transfer from bed to chair without armrest push. Walked 100m.",
+      "therapistNotes": "Good patellar mobility achieved. Knee flexion reached 92\u00b0. Patient reported slight evening ache post-session #7.",
+      "pmrDoctorStatus": "reviewed",
+      "pmrDoctorName": "Dr. Dharshan N A, MD (PMR)",
+      "pmrDoctorReviewedAt": "2026-09-23T14:30:00Z",
+      "pmrDoctorNotes": "Knee flexion crossed 90\u00b0 milestone on Day 15, which is an excellent clinical sign against arthrofibrosis. Extensor lag reduced to 2\u00b0. Approved progressing to 1.5 kg cuff weights for straight leg raises. Advised patient to maintain post-exercise cryotherapy for 15 minutes.",
+      "pmrDoctorAction": "Approved. Increased progressive resistance load for quad sets.",
+      "flaggedUrgent": false,
+      "complianceRate": "95%"
+    },
+    {
+      "id": "ses-101-07",
+      "patientId": "pat-101",
+      "patientName": "Rajesh Mehta",
+      "sessionNumber": 7,
+      "date": "2026-09-21",
+      "time": "10:30 AM",
+      "therapistName": "PT Rahul Sharma, MPT",
+      "vitals": {
+        "bp": "132/86 mmHg",
+        "pulse": "78 bpm",
+        "spo2": "98%"
+      },
+      "painScoreVAS": 5,
+      "romMeasurements": {
+        "rightKneeFlexion": "85\u00b0",
+        "rightKneeExtension": "6\u00b0",
+        "quadricepsLag": "4\u00b0"
+      },
+      "exercisesPerformed": [
+        "Supine heel slides with strap assistance (3 sets x 12 reps)",
+        "Isometric quad sets with towel roll under knee (4 sets x 10 reps)",
+        "Calf towel stretches and ankle pumps (3 sets x 20 reps)",
+        "Gait retraining with four-wheeled walker to single cane transition"
+      ],
+      "functionalMobility": "Initiated single cane ambulation under therapist supervision.",
+      "therapistNotes": "Patient felt confident. Incision wound dry, healing well with no signs of erythema or warmth.",
+      "pmrDoctorStatus": "reviewed",
+      "pmrDoctorName": "Dr. Dharshan N A, MD (PMR)",
+      "pmrDoctorReviewedAt": "2026-09-21T16:15:00Z",
+      "pmrDoctorNotes": "Surgical site reviewed via photo; healthy granulating scar. Cleared for partial weight bearing weaning to stick. Monitor flexion resistance carefully.",
+      "pmrDoctorAction": "Approved. Verified wound healing and sanctioned stick ambulation.",
+      "flaggedUrgent": false,
+      "complianceRate": "90%"
+    },
+    {
+      "id": "ses-101-06",
+      "patientId": "pat-101",
+      "patientName": "Rajesh Mehta",
+      "sessionNumber": 6,
+      "date": "2026-09-18",
+      "time": "11:00 AM",
+      "therapistName": "PT Rahul Sharma, MPT",
+      "vitals": {
+        "bp": "126/80 mmHg",
+        "pulse": "72 bpm",
+        "spo2": "99%"
+      },
+      "painScoreVAS": 6,
+      "romMeasurements": {
+        "rightKneeFlexion": "78\u00b0",
+        "rightKneeExtension": "8\u00b0",
+        "quadricepsLag": "6\u00b0"
+      },
+      "exercisesPerformed": [
+        "Continuous Passive Motion simulation with manual therapist guidance",
+        "Gentle patellar gliding",
+        "Quadriceps activation with electrical stimulation (TENS + NMES 15 min)"
+      ],
+      "functionalMobility": "Walked 60 meters with walker. Required slight assistance standing up.",
+      "therapistNotes": "Vastus medialis activation sluggish due to post-surgical arthrogenic inhibition. NMES helped recruit fibers.",
+      "pmrDoctorStatus": "reviewed",
+      "pmrDoctorName": "Dr. Dharshan N A, MD (PMR)",
+      "pmrDoctorReviewedAt": "2026-09-18T15:00:00Z",
+      "pmrDoctorNotes": "Reviewed NMES parameters (50 Hz, 300 \u00b5s pulse width). Instructed therapist to maintain NMES for 3 more sessions until active quad lag is under 3\u00b0.",
+      "pmrDoctorAction": "Approved with NMES protocol continuation.",
+      "flaggedUrgent": false,
+      "complianceRate": "92%"
+    },
+    {
+      "id": "ses-102-18",
+      "patientId": "pat-102",
+      "patientName": "Sunita Kapoor",
+      "sessionNumber": 18,
+      "date": "2026-09-25",
+      "time": "02:00 PM",
+      "therapistName": "PT Rahul Sharma, MPT",
+      "vitals": {
+        "bp": "136/85 mmHg",
+        "pulse": "78 bpm",
+        "spo2": "97%"
+      },
+      "painScoreVAS": 2,
+      "romMeasurements": {
+        "leftAnkleDorsiflexion": "8\u00b0 active",
+        "leftKneeFlexion": "110\u00b0",
+        "leftShoulderAbduction": "75\u00b0"
+      },
+      "exercisesPerformed": [
+        "Task-oriented sit-to-stand training from varying seat heights (4 sets x 8 reps)",
+        "Tandem stance and backward stepping for reactive balance (10 minutes)",
+        "Constraint-Induced Movement Therapy (CIMT) simulated block stacking (15 minutes)",
+        "Inhibitory tapping and slow sustained stretch for left calf spasticity"
+      ],
+      "functionalMobility": "Berg Balance Score improved to 44/56. Walked 40m without quad cane assistance with therapist guarding.",
+      "therapistNotes": "Remarkable improvement in dynamic pelvis stability. Patient showed minimal hip circumduction during swing phase.",
+      "pmrDoctorStatus": "pending_review",
+      "pmrDoctorName": "Dr. Dharshan N A, MD (PMR)",
+      "pmrDoctorNotes": "",
+      "pmrDoctorAction": "Awaiting PMR physician clinical verification",
+      "flaggedUrgent": false,
+      "complianceRate": "100%"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex-01",
+      "patientId": "pat-101",
+      "title": "Sliding Heel Flexion with Strap",
+      "category": "Knee Joint Range of Motion",
+      "frequency": "3 times daily",
+      "sets": "3 sets",
+      "reps": "12 reps (hold 5s at end-range)",
+      "targetMuscle": "Hamstrings & Knee Joint Capsule",
+      "instructions": "Sit comfortably on a firm bed or mat. Place a smooth towel or slider under your heel. Gently bend your knee, pulling your heel toward your buttocks using your leg muscles and a light tug with the strap. Hold at point of firm stretch without sharp pain.",
+      "precautions": "Do not bounce. Keep your patella pointing toward the ceiling without turning your hip outwards.",
+      "completedToday": true,
+      "doctorPrescriptionNote": "PMR Dr. Dharshan: Crucial for breaking post-TKR arthrofibrosis before Week 4."
+    },
+    {
+      "id": "ex-02",
+      "patientId": "pat-101",
+      "title": "Terminal Knee Extension (TKE) with Resistance Band",
+      "category": "Quadriceps Strengthening",
+      "frequency": "Twice daily",
+      "sets": "3 sets",
+      "reps": "15 reps",
+      "targetMuscle": "Vastus Medialis Oblique (VMO)",
+      "instructions": "Loop a green resistance band behind your operated knee with the other end secured to a heavy door anchor or bedpost. Stand facing the anchor. Start with your knee slightly bent, then straighten your knee fully against the band resistance, squeezing your quad tightly.",
+      "precautions": "Keep your back straight. Do not hyperextend beyond neutral.",
+      "completedToday": true,
+      "doctorPrescriptionNote": "PMR Dr. Dharshan: Progressed from yellow band to green on Day 16."
+    },
+    {
+      "id": "ex-03",
+      "patientId": "pat-101",
+      "title": "Single Leg Weight Shifting & Proprioception",
+      "category": "Balance & Fall Prevention",
+      "frequency": "Twice daily",
+      "sets": "4 sets",
+      "reps": "30 seconds each side",
+      "targetMuscle": "Gluteus Medius & Ankle Stabilizers",
+      "instructions": "Stand upright with hands resting lightly on the kitchen counter for safety. Shift 80% of your body weight onto the operated right leg, feeling the floor through your whole foot. Maintain steady pelvic alignment.",
+      "precautions": "Have a family member or sturdy support nearby at all times.",
+      "completedToday": false,
+      "doctorPrescriptionNote": "PMR Dr. Dharshan: Essential for preparing patient to discard stick safely."
+    },
+    {
+      "id": "ex-04",
+      "patientId": "pat-101",
+      "title": "Prone Quadriceps & Hip Flexor Stretch",
+      "category": "Soft Tissue Flexibility",
+      "frequency": "Twice daily",
+      "sets": "3 sets",
+      "reps": "30 second static holds",
+      "targetMuscle": "Rectus Femoris",
+      "instructions": "Lie flat on your stomach. If comfortable, loop a soft belt around your right ankle and gently pull your heel towards your glutes until a mild to moderate stretch is felt in the front of your thigh.",
+      "precautions": "Stop if you feel anterior knee pinching or pain over the prosthesis.",
+      "completedToday": false,
+      "doctorPrescriptionNote": "PMR Dr. Dharshan: Keep pelvis flat on the bed to isolate the quadriceps."
+    }
+  ],
+  "blogs": [
+    {
+      "id": "blog-01",
+      "slug": "why-pmr-doctor-monitoring-transforms-home-physiotherapy",
+      "title": "Why PMR Doctor Monitoring Transforms Home Physiotherapy: Beyond Random Exercise",
+      "category": "PMR & Physiatry",
+      "readTime": "5 min read",
+      "publishedAt": "2026-09-22",
+      "author": {
+        "name": "Dr. Dharshan N A, MD (PMR)",
+        "title": "Lead Physiatrist & Rehabilitation Specialist",
+        "avatar": "/dr-dharshan.jpg"
+      },
+      "coverImage": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=80",
+      "summary": "Explore why having a medical specialist in Physical Medicine & Rehabilitation oversee every home physiotherapy session eliminates recovery plateaus and prevents dangerous post-op complications.",
+      "content": "### The Gap in Modern Home Rehabilitation\n\nWhen a patient undergoes major surgery or suffers a neurological event like a stroke, the hospital stay is often brief. Within days, they are back home in their living room. In traditional home care models, a freelance physiotherapist is contracted to visit 3 to 5 times a week.\n\nWhile physical therapists possess wonderful hands-on techniques, a critical clinical gap exists: **the absence of continuous medical supervision**.\n\nA physiatrist (PMR Doctor - Physical Medicine and Rehabilitation) is an MD physician specifically trained to evaluate musculoskeletal, neurological, and cardiopulmonary systems as an integrated functional unit. \n\n### What Happens When a PMR Doctor Tracks Every Session?\n\n1. **Early Detection of Surgical Complications**:\nAfter joint replacements or spinal microdiscectomies, subtle warning signs\u2014such as asymmetric calf edema (early DVT), incision stitch abscess, or localized heat\u2014are often missed by patients. Our PMR doctors evaluate the session vitals and therapist photographs after every single visit.\n\n2. **Dynamic Protocol Titration**:\nHealing is not linear. One day a patient has an effusion flare-up; the next day their neuromuscular recruitment accelerates. Rather than waiting for a 6-week surgeon appointment, the PMR physician recalibrates the load, range of motion targets, and resistance bands in real time.\n\n3. **Objective Biomarkers & Outcome Tracking**:\nEvery session captures digital goniometer angles, Visual Analog Scale (VAS) pain levels, and timed functional scores. This data feeds into a medical-grade recovery model that predicts discharge milestones.\n\n4. **Seamless Medical Collaboration**:\nIf a patient requires a pharmacological adjustment\u2014such as neuropathic pain medication or anti-spasticity agents\u2014the PMR doctor liaises directly with the treating surgeon or neurologist.\n\n### The Result: 40% Shorter Time to Full Independence\n\nClinical trials in rehabilitation medicine demonstrate that physician-supervised tele-rehabilitation combined with certified home therapists produces statistically superior functional independence measures (FIM) and significantly lower readmission rates compared to unguided home care.",
+      "tags": [
+        "PMR Specialist",
+        "Physiatry",
+        "Home Healthcare",
+        "Clinical Oversight",
+        "Safety Standards"
+      ],
+      "views": 1420,
+      "featured": true,
+      "comments": [
+        {
+          "id": "c-1",
+          "author": "Dr. K. S. Murthy (Orthopedic Surgeon)",
+          "date": "2026-09-23",
+          "text": "As an arthroplasty surgeon, knowing that Dr. Dharshan and his PMR team are auditing joint flexion and wound integrity daily gives my patients and myself complete peace of mind."
+        },
+        {
+          "id": "c-2",
+          "author": "Sunil Varma",
+          "date": "2026-09-24",
+          "text": "My father recovered from hip replacement in half the expected time because the exercises were tuned after every single visit. Unmatched service!"
+        }
+      ]
+    },
+    {
+      "id": "blog-02",
+      "slug": "total-knee-replacement-115-degree-flexion-timeline",
+      "title": "Total Knee Replacement: Why 115-Degree Flexion Depends on Doctor-Monitored Home Sessions",
+      "category": "Joint Replacement",
+      "readTime": "6 min read",
+      "publishedAt": "2026-09-20",
+      "author": {
+        "name": "PT Rahul Sharma, MPT",
+        "title": "Senior Musculoskeletal Physiotherapist",
+        "avatar": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=256&q=80"
+      },
+      "coverImage": "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=1200&q=80",
+      "summary": "The first 30 days post-TKR determine your lifelong mobility. Learn the physiological stages of scar tissue and how PMR physician guidance prevents knee arthrofibrosis.",
+      "content": "### The 30-Day Race Against Arthrofibrosis\n\nFollowing total knee arthroplasty, the body initiates a robust inflammatory cascade. Collagen fibers begin cross-linking to heal surgical incisions and capsular tissue. If physical therapy is too gentle, the joint capsule contracts, permanently locking the knee at 70\u00b0 to 80\u00b0 flexion. If therapy is too aggressive, joint effusion triggers arthrogenic muscle inhibition, shutting down the quadriceps.\n\nThis delicate biological tightrope is why **PMR doctor monitoring is game-changing**.\n\n### The Clinical Milestones We Track at Home\n\n- **Week 1 (Days 1\u20137)**: Passive knee extension to 0\u00b0. Eliminating extensor lag is critical; walking with a flexed knee overloads the opposite hip and lumbar spine.\n- **Week 2 (Days 8\u201314)**: Active flexion crossing 90\u00b0. This allows comfortable sitting on standard dining chairs and using commodes independently.\n- **Week 3 (Days 15\u201321)**: Active flexion 105\u00b0 to 110\u00b0. Stair ascent initiation with reciprocal stepping.\n- **Week 4\u20136**: Active flexion 115\u00b0 to 125\u00b0. Normal gait velocity without assistive walking devices.\n\n### How PhysioPMR Clinicians Address Pain Spikes\n\nWhen a patient experiences a pain spike from VAS 3 to VAS 7, conventional therapy might halt exercises altogether or push through dangerous inflammation. In our model:\n1. The therapist logs the exact joint circumference and pain rating.\n2. The PMR physician reviews the log within hours and differentiates between capsular stretch pain vs pes anserine bursitis or patellofemoral friction.\n3. The exercise prescription is modified on the spot with targeted closed-chain modifications and cryo-compression protocols.",
+      "tags": [
+        "Knee Replacement",
+        "TKR Recovery",
+        "Arthrofibrosis",
+        "ROM Flexion",
+        "Home PT"
+      ],
+      "views": 2180,
+      "featured": true,
+      "comments": [
+        {
+          "id": "c-3",
+          "author": "Rajesh Mehta (Patient)",
+          "date": "2026-09-21",
+          "text": "I was terrified of joint stiffness. Rahul and Dr. Dharshan kept adjusting my routine daily, and I'm already at 98\u00b0 on day 18!"
+        }
+      ]
+    },
+    {
+      "id": "blog-03",
+      "slug": "stroke-rehabilitation-at-home-the-critical-first-90-days",
+      "title": "Stroke Rehabilitation at Home: Neuroplasticity, Spasticity & The Physiatrist's Touch",
+      "category": "Neuro & Stroke",
+      "readTime": "7 min read",
+      "publishedAt": "2026-09-17",
+      "author": {
+        "name": "Dr. Dharshan N A, MD (PMR)",
+        "title": "Lead PMR Specialist (Physiatrist)",
+        "avatar": "/dr-dharshan.jpg"
+      },
+      "coverImage": "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1200&q=80",
+      "summary": "Neuroplasticity is at its zenith during the first 3 months post-stroke. How our PMR-led home neurological rehab protocol reprograms motor pathways safely.",
+      "content": "### Harnessing the Neuroplastic Window\n\nFollowing an ischemic or hemorrhagic stroke, undamaged areas of the cerebral cortex can adapt to assume functions previously governed by damaged neural tissue. This biological miracle is known as **neuroplasticity**.\n\nHowever, neuroplasticity is a double-edged sword: if a patient practices abnormal compensatory patterns (e.g. severe hip hiking, abnormal circumduction gait, or internal shoulder rotation synergy), the brain hardwires those pathological motor schemas.\n\n### The PMR Doctor's Neurological Assessment Protocol\n\nIn our home neurological program, our physiatrist tracks:\n- **Brunnstrom Stages of Motor Recovery**\n- **Modified Ashworth Scale for Muscle Spasticity**\n- **Berg Balance Scale for Fall Risk Assessment**\n- **Functional Independence Measure (FIM) for Activities of Daily Living**\n\nWhen spasticity in the calf or bicep threatens to cause fixed contractures, the PMR physician initiates serial antispasticity positioning, electrical stimulation protocols, and coordinates with the patient's neurologist for oral or focal treatments.\n\nHome-based therapy allows training in the patient's actual living environment\u2014their real bathroom thresholds, bedside transfers, and kitchen counters\u2014accelerating practical autonomy.",
+      "tags": [
+        "Stroke Recovery",
+        "Neuroplasticity",
+        "Spasticity",
+        "Hemiparesis",
+        "PMR Doctor"
+      ],
+      "views": 980,
+      "featured": false,
+      "comments": []
+    },
+    {
+      "id": "blog-04",
+      "slug": "preventing-senior-falls-vestibular-proprioception-home-training",
+      "title": "Preventing Senior Falls at Home: Why Walking Alone Isn't Enough",
+      "category": "Geriatric Care",
+      "readTime": "4 min read",
+      "publishedAt": "2026-09-12",
+      "author": {
+        "name": "PT Rahul Sharma, MPT",
+        "title": "Senior Musculoskeletal Physiotherapist",
+        "avatar": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=256&q=80"
+      },
+      "coverImage": "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=1200&q=80",
+      "summary": "1 in 3 adults over 65 falls annually. Discover how targeted vestibular exercises, gluteal strengthening, and PMR home environmental audits safeguard elderly loved ones.",
+      "content": "### Walking Is Great, But It Does Not Train Reactive Balance\n\nMany elderly individuals and their families believe that a morning walk in the garden is sufficient to maintain mobility. While cardiovascular walking is beneficial, it fails to train three critical fall-prevention mechanisms:\n1. **Proprioceptive Joint Sense**: The neurological ability of ankle receptors to detect uneven ground surfaces.\n2. **Vestibular-Ocular Reflex (VOR)**: Stabilizing visual focus on a target while the head is moving.\n3. **Reactive Stepping Velocity**: The rapid forward or lateral step triggered automatically when stumbling over a rug or pet.\n\nOur physiatrist-led geriatric fall prevention program combines dual-task cognitive-motor drills with dynamic balance challenges in the safety of home.",
+      "tags": [
+        "Geriatric Rehab",
+        "Fall Prevention",
+        "Elderly Care",
+        "Balance Training",
+        "Senior Health"
+      ],
+      "views": 1640,
+      "featured": false,
+      "comments": []
+    },
+    {
+      "id": "blog-05",
+      "slug": "lumbar-disc-herniation-sciatica-home-physiotherapy-guidelines",
+      "title": "Sciatica & Lumbar Disc Herniation: What to Do in the First 14 Days at Home",
+      "category": "Spine & Ergonomics",
+      "readTime": "5 min read",
+      "publishedAt": "2026-09-05",
+      "author": {
+        "name": "Dr. Dharshan N A, MD (PMR)",
+        "title": "Lead PMR Specialist (Physiatrist)",
+        "avatar": "/dr-dharshan.jpg"
+      },
+      "coverImage": "https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?auto=format&fit=crop&w=1200&q=80",
+      "summary": "Acute back spasms and radiating leg pain require precise directional preference therapy. How McKenzie principles and PMR monitoring avoid unnecessary spine surgery.",
+      "content": "### Centralization vs Peripheralization: The Golden Clinical Rule\n\nWhen a lumbar intervertebral disc bulges and impinges on the L4, L5, or S1 nerve root, pain travels down the posterior leg\u2014a condition known as sciatica.\n\nIn our home rehabilitation protocol, the PMR physician instructs therapists to constantly monitor **the direction of symptom migration**:\n- **Centralization**: Pain moves out of the foot and calf up into the low back. This is an objective sign that mechanical pressure on the nerve root is diminishing.\n- **Peripheralization**: Pain shoots further down toward the toes or accompanies motor weakness (foot drop). This requires immediate clinical repositioning and medical escalation.\n\nWith guided home extension positioning and gentle neurodynamic nerve flossing, over 85% of disc herniations resolve conservatively without surgery.",
+      "tags": [
+        "Sciatica",
+        "Disc Herniation",
+        "Spine Rehab",
+        "McKenzie Method",
+        "PMR Doctor"
+      ],
+      "views": 2490,
+      "featured": false,
+      "comments": []
+    }
+  ],
+  "bookings": [
+    {
+      "id": "bk-1001",
+      "patientName": "Kavita Rao",
+      "phone": "+91 98450 78210",
+      "email": "kavita.r@gmail.com",
+      "serviceType": "Neuro & Stroke Rehabilitation",
+      "address": "Flat 304, Prestige Palms, Whitefield",
+      "preferredDate": "2026-09-28",
+      "preferredSlot": "Morning (09:00 AM - 12:00 PM)",
+      "doctorConsultation": "In-Home PT Visit + Dr. Dharshan PMR Review & Blueprint",
+      "symptoms": "Mother had mild stroke 3 weeks ago, needs gait training & left arm mobility",
+      "status": "Confirmed",
+      "createdAt": "2026-09-24T10:15:00Z"
+    },
+    {
+      "id": "bk-1002",
+      "patientName": "Vikram Malhotra",
+      "phone": "+91 99002 44119",
+      "email": "vikram.m@outlook.com",
+      "serviceType": "Post-Operative Orthopedic Care",
+      "address": "Villa 18, Palm Meadows, Sarjapur",
+      "preferredDate": "2026-09-27",
+      "preferredSlot": "Afternoon (02:00 PM - 05:00 PM)",
+      "doctorConsultation": "In-Home PT Visit + Dr. Dharshan PMR Review & Blueprint",
+      "symptoms": "Bilateral total knee replacement 10 days ago, struggling with walker walking",
+      "status": "Pending Allocation",
+      "createdAt": "2026-09-25T14:40:00Z"
+    }
+  ]
+}
