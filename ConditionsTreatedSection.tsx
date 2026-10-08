@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { useApp } from './AppContext';
-import { Search, Calendar, ShieldCheck, X, CheckCircle2 } from 'lucide-react';
+import { Search, Calendar, ShieldCheck, X, CheckCircle2, Briefcase, Activity, Clock } from 'lucide-react';
 
 type Cat = 'all' | 'ortho' | 'neuro' | 'spine' | 'geriatric' | 'cardio';
 
@@ -11,31 +11,341 @@ interface ConditionItem {
   summary: string;
   timeline: string;
   pmrFocus: string;
+  protocol: string[];
+  equipment: string[];
 }
 
 const CONDITIONS: ConditionItem[] = [
-  { id: 'tkr', name: 'Total Knee Replacement', category: 'ortho', summary: 'Restore extension and flexion, protect the wound, and rebuild walking confidence at home.', timeline: '3–6 weeks', pmrFocus: 'Day 7 · 14 · 21 flexion and lag audits' },
-  { id: 'thr', name: 'Total Hip Replacement', category: 'ortho', summary: 'Hip precautions, safe transfers, and progressive walking under clear medical guidance.', timeline: '4–8 weeks', pmrFocus: 'Precaution clearance and gait review' },
-  { id: 'acl', name: 'ACL / Meniscus Reconstruction', category: 'ortho', summary: 'Protect the graft while restoring extension, strength and controlled loading.', timeline: 'Phase-based', pmrFocus: 'Milestone load progression' },
-  { id: 'rotator', name: 'Rotator Cuff Repair', category: 'ortho', summary: 'Protected mobility, then staged strength without irritating the repair.', timeline: '6–12 weeks', pmrFocus: 'Range and irritability checks' },
-  { id: 'spine-op', name: 'Spine Surgery Recovery', category: 'ortho', summary: 'Safe mobility, core control and graded return to daily activity.', timeline: '4–8 weeks', pmrFocus: 'Neurological red-flag watch' },
-  { id: 'orif', name: 'Fracture Fixation (ORIF)', category: 'ortho', summary: 'Joint mobility, oedema control and progressive weight-bearing as cleared.', timeline: 'Variable', pmrFocus: 'Healing-stage alignment' },
-  { id: 'stroke', name: 'Stroke Rehabilitation', category: 'neuro', summary: 'Early mobility, tone management and functional independence training at home.', timeline: '8–12+ weeks', pmrFocus: 'Neuro stage audits' },
-  { id: 'parkinson', name: "Parkinson's Mobility", category: 'neuro', summary: 'Gait cues, balance practice and fall-risk reduction in the home environment.', timeline: 'Ongoing', pmrFocus: 'Motor strategy review' },
-  { id: 'bells', name: "Bell's Palsy Support", category: 'neuro', summary: 'Facial mobility guidance and eye-care awareness with specialist oversight.', timeline: '4–12 weeks', pmrFocus: 'Recovery trajectory check' },
-  { id: 'sci', name: 'Spinal Cord Injury Support', category: 'neuro', summary: 'Positioning, transfers and secondary-complication awareness at home.', timeline: 'Long-term', pmrFocus: 'Complication surveillance' },
-  { id: 'neuropathy', name: 'Peripheral Neuropathy Mobility', category: 'neuro', summary: 'Balance, foot care education and safe walking strategies.', timeline: 'Ongoing', pmrFocus: 'Fall-risk focus' },
-  { id: 'sciatica', name: 'Sciatica / Disc-related Pain', category: 'spine', summary: 'Pain-centralisation strategies, graded activity and posture coaching.', timeline: '3–6 weeks', pmrFocus: 'Symptom response audits' },
-  { id: 'cervical', name: 'Cervical Spondylosis', category: 'spine', summary: 'Neck mobility, posture and activity modification with clear stop rules.', timeline: '3–6 weeks', pmrFocus: 'Radicular symptom watch' },
-  { id: 'knee-oa', name: 'Knee Osteoarthritis', category: 'spine', summary: 'Strength, load management and walking tolerance without flare-ups.', timeline: '4–8 weeks', pmrFocus: 'Function-focused plan' },
-  { id: 'frozen', name: 'Frozen Shoulder', category: 'spine', summary: 'Phased mobility matched to irritability, not forced stretching.', timeline: '5–10 weeks', pmrFocus: 'Stage-matched protocol' },
-  { id: 'lbp', name: 'Mechanical Low Back Pain', category: 'spine', summary: 'Movement confidence, core endurance and return to work tasks.', timeline: '3–6 weeks', pmrFocus: 'Red-flag screening' },
-  { id: 'falls', name: 'Fall Prevention (Elderly)', category: 'geriatric', summary: 'Balance, strength and home hazard awareness for safer independence.', timeline: '6 weeks+', pmrFocus: 'Multi-factor risk review' },
-  { id: 'frailty', name: 'Sarcopenia / Frailty Support', category: 'geriatric', summary: 'Progressive strength and endurance appropriate for older adults.', timeline: 'Ongoing', pmrFocus: 'Load tolerance monitoring' },
-  { id: 'post-hosp', name: 'Post-Hospital Deconditioning', category: 'geriatric', summary: 'Rebuild stamina, transfers and confidence after a hospital stay.', timeline: '4–8 weeks', pmrFocus: 'Medical stability checks' },
-  { id: 'cabg', name: 'Post-Cardiac Surgery Support', category: 'cardio', summary: 'Sternal precautions, graded walking and breathing strategies as advised.', timeline: '6–12 weeks', pmrFocus: 'Cardiac precaution adherence' },
-  { id: 'copd', name: 'COPD / Chest Physio Support', category: 'cardio', summary: 'Breathing techniques, secretion clearance education and activity pacing.', timeline: 'Ongoing', pmrFocus: 'Symptom escalation rules' },
-  { id: 'icu', name: 'Post-ICU Recovery', category: 'cardio', summary: 'Strength, breathing and functional mobility after critical illness.', timeline: 'Variable', pmrFocus: 'Multi-system recovery plan' },
+  {
+    id: 'tkr',
+    name: 'Total Knee Replacement',
+    category: 'ortho',
+    summary: 'Prevent stiffness, restore extension and flexion, and rebuild safe walking at home.',
+    timeline: '3–6 weeks',
+    pmrFocus: 'Day 7 wound & lag check · Day 14 90° flexion audit · Day 21 stair readiness',
+    protocol: [
+      'Patellar glides and heel slides',
+      'Quad sets and terminal extension work',
+      'Gait progression: walker → stick → independent',
+      'Stair practice when cleared',
+    ],
+    equipment: ['Digital goniometer', 'TheraBand', 'Ankle weights', 'NMES unit', 'Cryotherapy pack'],
+  },
+  {
+    id: 'thr',
+    name: 'Total Hip Replacement',
+    category: 'ortho',
+    summary: 'Hip precautions, safe transfers, glute activation, and progressive walking.',
+    timeline: '4–8 weeks',
+    pmrFocus: 'Precaution adherence · abductor loading clearance · gait quality review',
+    protocol: [
+      'Precaution-safe mobility drills',
+      'Glute sets and controlled abduction',
+      'Sit-to-stand with height strategy',
+      'Progressive weight-bearing walking',
+    ],
+    equipment: ['Goniometer', 'Loop bands', 'Cryotherapy wrap', 'Vitals kit'],
+  },
+  {
+    id: 'acl',
+    name: 'ACL / Meniscus Reconstruction',
+    category: 'ortho',
+    summary: 'Protect the graft while restoring extension, strength and controlled loading.',
+    timeline: 'Phase-based',
+    pmrFocus: 'Extension recovery · swelling control · phase load authorisation',
+    protocol: [
+      'Full extension priority early',
+      'Quad activation without graft stress',
+      'Graded closed-chain loading',
+      'Return-to-activity criteria later',
+    ],
+    equipment: ['Goniometer', 'Biofeedback cues', 'Resistance bands', 'Cryo pack'],
+  },
+  {
+    id: 'rotator',
+    name: 'Rotator Cuff Repair',
+    category: 'ortho',
+    summary: 'Protected mobility first, then staged strength without irritating the repair.',
+    timeline: '6–12 weeks',
+    pmrFocus: 'Range vs irritability · sleep posture · strength phase clearance',
+    protocol: [
+      'Protected passive / assisted range',
+      'Scapular control drills',
+      'Graded active elevation',
+      'Eccentric cuff loading when ready',
+    ],
+    equipment: ['Goniometer', 'Wand / stick', 'Light bands', 'Ice pack'],
+  },
+  {
+    id: 'spine-op',
+    name: 'Spine Surgery Recovery',
+    category: 'ortho',
+    summary: 'Safe mobility, core control and graded return to daily activity.',
+    timeline: '4–8 weeks',
+    pmrFocus: 'Neurological red-flag watch · sitting tolerance · lifting rules',
+    protocol: [
+      'Log-roll and safe transfers',
+      'Walking programme',
+      'Gentle core activation',
+      'Ergonomic return-to-task coaching',
+    ],
+    equipment: ['Vitals kit', 'Resistance bands', 'Posture cues', 'Timer for pacing'],
+  },
+  {
+    id: 'orif',
+    name: 'Fracture Fixation (ORIF)',
+    category: 'ortho',
+    summary: 'Joint mobility, swelling control and progressive weight-bearing as cleared.',
+    timeline: 'Variable',
+    pmrFocus: 'Healing-stage loading · joint stiffness prevention',
+    protocol: [
+      'Adjacent joint mobility',
+      'Oedema management',
+      'Protected strengthening',
+      'Gait with prescribed aids',
+    ],
+    equipment: ['Goniometer', 'Compression wrap', 'Bands', 'Gait belt if needed'],
+  },
+  {
+    id: 'stroke',
+    name: 'Stroke Rehabilitation',
+    category: 'neuro',
+    summary: 'Early mobility, tone management and functional independence training at home.',
+    timeline: '8–12+ weeks',
+    pmrFocus: 'Tone / positioning · stage-based goals · shoulder protection',
+    protocol: [
+      'Bed mobility and transfers',
+      'Tone-inhibiting positioning',
+      'Task practice for arm / leg',
+      'Balance and walking progression',
+    ],
+    equipment: ['NMES unit', 'Positioning pillows', 'Balance tools', 'Gait belt'],
+  },
+  {
+    id: 'parkinson',
+    name: "Parkinson's Mobility",
+    category: 'neuro',
+    summary: 'Gait cues, amplitude training and fall-risk reduction in the home.',
+    timeline: 'Ongoing',
+    pmrFocus: 'Motor strategy review · dual-task safety',
+    protocol: [
+      'Big-movement practice',
+      'Cueing for gait initiation',
+      'Turn and transfer strategy',
+      'Home fall-risk coaching',
+    ],
+    equipment: ['Metronome / cue tools', 'Resistance bands', 'Chair for support work'],
+  },
+  {
+    id: 'bells',
+    name: "Bell's Palsy Support",
+    category: 'neuro',
+    summary: 'Facial mobility guidance and eye-care awareness with specialist oversight.',
+    timeline: '4–12 weeks',
+    pmrFocus: 'Recovery trajectory · synkinesis watch',
+    protocol: [
+      'Gentle facial mobility',
+      'Eye protection education',
+      'Symmetry awareness drills',
+      'Pacing to avoid overwork',
+    ],
+    equipment: ['Mirror for feedback', 'Soft manual therapy tools'],
+  },
+  {
+    id: 'sci',
+    name: 'Spinal Cord Injury Support',
+    category: 'neuro',
+    summary: 'Positioning, transfers and secondary-complication awareness at home.',
+    timeline: 'Long-term',
+    pmrFocus: 'Skin / tone / respiratory watch · equipment fit',
+    protocol: [
+      'Pressure relief routines',
+      'Transfer practice',
+      'Range maintenance',
+      'Caregiver training',
+    ],
+    equipment: ['Transfer board if indicated', 'Range tools', 'Positioning aids'],
+  },
+  {
+    id: 'neuropathy',
+    name: 'Peripheral Neuropathy Mobility',
+    category: 'neuro',
+    summary: 'Balance, foot care education and safe walking strategies.',
+    timeline: 'Ongoing',
+    pmrFocus: 'Fall-risk and sensory compensation strategies',
+    protocol: [
+      'Balance progression',
+      'Foot inspection education',
+      'Safe footwear advice',
+      'Walking endurance pacing',
+    ],
+    equipment: ['Balance pad', 'Resistance bands', 'Gait assessment tools'],
+  },
+  {
+    id: 'sciatica',
+    name: 'Sciatica / Disc-related Pain',
+    category: 'spine',
+    summary: 'Directional preference, graded activity and posture coaching.',
+    timeline: '3–6 weeks',
+    pmrFocus: 'Symptom centralisation response · red-flag screening',
+    protocol: [
+      'Repeated movement testing response',
+      'Sitting / standing load management',
+      'Nerve mobility as appropriate',
+      'Return-to-walk programme',
+    ],
+    equipment: ['Treatment plinth alternatives at home', 'Bands', 'Heat/ice as advised'],
+  },
+  {
+    id: 'cervical',
+    name: 'Cervical Spondylosis',
+    category: 'spine',
+    summary: 'Neck mobility, posture and activity modification with clear stop rules.',
+    timeline: '3–6 weeks',
+    pmrFocus: 'Radicular symptom watch · desk ergonomics',
+    protocol: [
+      'Gentle cervical mobility',
+      'Scapular endurance',
+      'Workstation coaching',
+      'Sleep posture advice',
+    ],
+    equipment: ['Towel rolls / posture props', 'Light bands'],
+  },
+  {
+    id: 'knee-oa',
+    name: 'Knee Osteoarthritis',
+    category: 'spine',
+    summary: 'Strength, load management and walking tolerance without flare-ups.',
+    timeline: '4–8 weeks',
+    pmrFocus: 'Function-focused goals · flare management rules',
+    protocol: [
+      'Quad and hip strength',
+      'Sit-to-stand practice',
+      'Walking dosage plan',
+      'Activity pacing',
+    ],
+    equipment: ['Bands', 'Ankle weights', 'Goniometer', 'Ice pack'],
+  },
+  {
+    id: 'frozen',
+    name: 'Frozen Shoulder',
+    category: 'spine',
+    summary: 'Phase-matched mobility — not aggressive stretching into high irritability.',
+    timeline: '5–10 weeks',
+    pmrFocus: 'Stage and irritability matching · sleep disruption control',
+    protocol: [
+      'Pain-calibrated mobility',
+      'Scapular mechanics',
+      'Functional reach practice',
+      'Strength when calm enough',
+    ],
+    equipment: ['Goniometer', 'Wand', 'Bands', 'Heat/ice'],
+  },
+  {
+    id: 'lbp',
+    name: 'Mechanical Low Back Pain',
+    category: 'spine',
+    summary: 'Movement confidence, core endurance and return to work tasks.',
+    timeline: '3–6 weeks',
+    pmrFocus: 'Red-flag screening · graded exposure to feared movements',
+    protocol: [
+      'Pain education and pacing',
+      'Core endurance drills',
+      'Hip mobility as needed',
+      'Work-task simulation',
+    ],
+    equipment: ['Bands', 'Timer', 'Simple home props'],
+  },
+  {
+    id: 'falls',
+    name: 'Fall Prevention (Elderly)',
+    category: 'geriatric',
+    summary: 'Balance, strength and home hazard awareness for safer independence.',
+    timeline: '6 weeks+',
+    pmrFocus: 'Multi-factor fall risk · medication / vision awareness discussion',
+    protocol: [
+      'Static and dynamic balance',
+      'Sit-to-stand strength',
+      'Dual-task walking',
+      'Home hazard walk-through',
+    ],
+    equipment: ['Balance pad', 'Chair support', 'Resistance bands', 'Gait belt'],
+  },
+  {
+    id: 'frailty',
+    name: 'Sarcopenia / Frailty Support',
+    category: 'geriatric',
+    summary: 'Progressive strength and endurance appropriate for older adults.',
+    timeline: 'Ongoing',
+    pmrFocus: 'Load tolerance · recovery between sessions',
+    protocol: [
+      'Sit-to-stand progressions',
+      'Light resistance training',
+      'Walking dosage',
+      'Energy conservation tips',
+    ],
+    equipment: ['Bands', 'Light weights', 'Vitals kit'],
+  },
+  {
+    id: 'post-hosp',
+    name: 'Post-Hospital Deconditioning',
+    category: 'geriatric',
+    summary: 'Rebuild stamina, transfers and confidence after a hospital stay.',
+    timeline: '4–8 weeks',
+    pmrFocus: 'Medical stability · readmission risk factors',
+    protocol: [
+      'Transfer independence',
+      'Walking endurance',
+      'Breathing and pacing',
+      'Family education',
+    ],
+    equipment: ['Pulse oximeter', 'Gait belt', 'Bands'],
+  },
+  {
+    id: 'cabg',
+    name: 'Post-Cardiac Surgery Support',
+    category: 'cardio',
+    summary: 'Sternal precautions, graded walking and breathing strategies as advised.',
+    timeline: '6–12 weeks',
+    pmrFocus: 'Precaution adherence · symptom-limited progression',
+    protocol: [
+      'Sternal-safe mobility',
+      'Graded walking plan',
+      'Breathing exercises',
+      'Activity diary coaching',
+    ],
+    equipment: ['Pulse oximeter', 'BP monitor', 'Incentive spirometer guidance tools'],
+  },
+  {
+    id: 'copd',
+    name: 'COPD / Chest Physio Support',
+    category: 'cardio',
+    summary: 'Breathing techniques, secretion strategies and activity pacing.',
+    timeline: 'Ongoing',
+    pmrFocus: 'Exacerbation warning signs · energy conservation',
+    protocol: [
+      'Breathing pattern training',
+      'Airway clearance education',
+      'Paced walking',
+      'Recovery positioning',
+    ],
+    equipment: ['Pulse oximeter', 'Timing tools', 'Positioning supports'],
+  },
+  {
+    id: 'icu',
+    name: 'Post-ICU Recovery',
+    category: 'cardio',
+    summary: 'Strength, breathing and functional mobility after critical illness.',
+    timeline: 'Variable',
+    pmrFocus: 'Multi-system recovery plan · fatigue management',
+    protocol: [
+      'Bed to chair progression',
+      'Strength rebuilding',
+      'Breathing recovery',
+      'Cognitive-motor simple tasks as needed',
+    ],
+    equipment: ['Pulse oximeter', 'Bands', 'Gait belt', 'Vitals kit'],
+  },
 ];
 
 const CATS: { id: Cat; label: string }[] = [
@@ -58,7 +368,11 @@ export const ConditionsTreatedSection: React.FC = () => {
       if (cat !== 'all' && c.category !== cat) return false;
       if (!q.trim()) return true;
       const s = q.toLowerCase();
-      return c.name.toLowerCase().includes(s) || c.summary.toLowerCase().includes(s);
+      return (
+        c.name.toLowerCase().includes(s) ||
+        c.summary.toLowerCase().includes(s) ||
+        c.equipment.some((e) => e.toLowerCase().includes(s))
+      );
     });
   }, [cat, q]);
 
@@ -67,26 +381,24 @@ export const ConditionsTreatedSection: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-10">
           <span className="inline-flex text-[11px] font-semibold uppercase tracking-wider text-teal-700 bg-teal-50 border border-teal-100 px-3 py-1 rounded-full">
-            Conditions
+            Conditions & home kit
           </span>
           <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mt-3 tracking-tight">
-            Home rehabilitation pathways we support
+            Pathways, protocols and equipment we bring
           </h2>
           <p className="text-[15px] text-slate-600 mt-3 leading-relaxed">
-            Structured plans with Physiatrist oversight — not a generic exercise list alone.
+            Click any condition to see the home protocol, PMR oversight points, and the portable equipment typically brought to visits.
           </p>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-3 mb-6">
-          <div className="relative flex-1">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
-            <input
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
-              placeholder="Search conditions…"
-              className="w-full pl-10 pr-3 py-2.5 rounded-xl border border-slate-200 text-[14px] focus:outline-none focus:ring-2 focus:ring-teal-600/20 focus:border-teal-600"
-            />
-          </div>
+        <div className="relative mb-4">
+          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <input
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+            placeholder="Search conditions or equipment (e.g. NMES, goniometer)…"
+            className="w-full pl-10 pr-3 py-2.5 rounded-xl border border-slate-200 text-[14px] focus:outline-none focus:ring-2 focus:ring-teal-600/20 focus:border-teal-600"
+          />
         </div>
 
         <div className="flex flex-wrap gap-1.5 mb-8">
@@ -118,10 +430,18 @@ export const ConditionsTreatedSection: React.FC = () => {
                 {CATS.find((x) => x.id === c.category)?.label}
               </div>
               <h3 className="text-[15px] font-semibold text-slate-900 mb-1.5">{c.name}</h3>
-              <p className="text-[13px] text-slate-600 leading-relaxed line-clamp-3">{c.summary}</p>
-              <div className="mt-3 text-[12px] text-slate-500 flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-teal-600" />
-                {c.timeline}
+              <p className="text-[13px] text-slate-600 leading-relaxed line-clamp-2 mb-3">{c.summary}</p>
+              <div className="flex flex-wrap gap-1.5">
+                {c.equipment.slice(0, 3).map((e) => (
+                  <span key={e} className="text-[10px] px-2 py-0.5 rounded-md bg-white border border-slate-200 text-slate-600">
+                    {e}
+                  </span>
+                ))}
+                {c.equipment.length > 3 && (
+                  <span className="text-[10px] px-2 py-0.5 rounded-md bg-teal-50 text-teal-700 border border-teal-100">
+                    +{c.equipment.length - 3} more
+                  </span>
+                )}
               </div>
             </button>
           ))}
@@ -144,9 +464,9 @@ export const ConditionsTreatedSection: React.FC = () => {
       </div>
 
       {selected && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40" onClick={() => setSelected(null)}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/45" onClick={() => setSelected(null)}>
           <div
-            className="bg-white rounded-2xl max-w-lg w-full shadow-xl border border-slate-200 p-6 space-y-4"
+            className="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-xl border border-slate-200 p-6 space-y-5"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-start justify-between gap-3">
@@ -160,17 +480,56 @@ export const ConditionsTreatedSection: React.FC = () => {
                 <X className="w-5 h-5 text-slate-500" />
               </button>
             </div>
+
             <p className="text-[14px] text-slate-600 leading-relaxed">{selected.summary}</p>
-            <div className="space-y-2 text-[13px]">
-              <div className="flex items-start gap-2">
-                <CheckCircle2 className="w-4 h-4 text-teal-600 mt-0.5 shrink-0" />
-                <span><strong className="text-slate-800">Typical pathway:</strong> {selected.timeline}</span>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-[13px]">
+              <div className="bg-slate-50 border border-slate-100 rounded-xl p-3">
+                <div className="flex items-center gap-1.5 text-slate-500 text-[11px] font-semibold uppercase mb-1">
+                  <Clock className="w-3.5 h-3.5" /> Typical pathway
+                </div>
+                <div className="font-medium text-slate-800">{selected.timeline}</div>
               </div>
-              <div className="flex items-start gap-2">
-                <ShieldCheck className="w-4 h-4 text-teal-600 mt-0.5 shrink-0" />
-                <span><strong className="text-slate-800">PMR focus:</strong> {selected.pmrFocus}</span>
+              <div className="bg-slate-50 border border-slate-100 rounded-xl p-3">
+                <div className="flex items-center gap-1.5 text-slate-500 text-[11px] font-semibold uppercase mb-1">
+                  <ShieldCheck className="w-3.5 h-3.5" /> PMR oversight
+                </div>
+                <div className="font-medium text-slate-800">{selected.pmrFocus}</div>
               </div>
             </div>
+
+            <div>
+              <div className="flex items-center gap-1.5 text-[12px] font-semibold text-slate-800 mb-2">
+                <Activity className="w-4 h-4 text-teal-600" />
+                Home protocol focus
+              </div>
+              <ul className="space-y-1.5">
+                {selected.protocol.map((p) => (
+                  <li key={p} className="flex items-start gap-2 text-[13px] text-slate-600">
+                    <CheckCircle2 className="w-4 h-4 text-teal-600 mt-0.5 shrink-0" />
+                    {p}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <div className="flex items-center gap-1.5 text-[12px] font-semibold text-slate-800 mb-2">
+                <Briefcase className="w-4 h-4 text-teal-600" />
+                Equipment we typically bring
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {selected.equipment.map((e) => (
+                  <span key={e} className="text-[12px] px-2.5 py-1 rounded-lg bg-teal-50 text-teal-800 border border-teal-100">
+                    {e}
+                  </span>
+                ))}
+              </div>
+              <p className="text-[11px] text-slate-400 mt-2">
+                Kit is matched to the pathway and may vary after assessment.
+              </p>
+            </div>
+
             <button
               type="button"
               onClick={() => {
