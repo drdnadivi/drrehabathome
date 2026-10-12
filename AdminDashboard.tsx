@@ -1,34 +1,54 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useApp } from './AppContext';
-import { ShieldCheck, BookOpen, Plus, Edit, Trash2, Eye, Calendar, Users, Activity, CheckCircle2, Search, Filter } from 'lucide-react';
-import { fetchBlogs, deleteBlog, fetchBookings, updateBookingStatus, fetchPatients, fetchStats } from './api';
-import { Blog, Booking, Patient, SystemStats } from './types';
+import { ShieldCheck, Plus, Calendar, Users, BookOpen, UserPlus } from 'lucide-react';
+import {
+  fetchBlogs,
+  deleteBlog,
+  fetchBookings,
+  updateBookingStatus,
+  fetchPatients,
+  fetchStats,
+  fetchUsers,
+  createUser,
+  enrollBooking,
+} from './api';
+import { Blog, Booking, Patient, SystemStats, User } from './types';
 
 export const AdminDashboard: React.FC = () => {
-  const { openModal, refreshCount, showToast } = useApp();
+  const { openModal, refreshCount, showToast, triggerRefresh, currentUser } = useApp();
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [patients, setPatients] = useState<Patient[]>([]);
+  const [team, setTeam] = useState<User[]>([]);
   const [stats, setStats] = useState<SystemStats | null>(null);
-  const [activeTab, setActiveTab] = useState<'blogs' | 'bookings' | 'patients'>('blogs');
-  const [blogSearch, setBlogSearch] = useState('');
+  const [tab, setTab] = useState<'bookings' | 'patients' | 'team' | 'blogs'>('bookings');
   const [loading, setLoading] = useState(true);
+
+  const [newUser, setNewUser] = useState({
+    name: '',
+    email: '',
+    password: '',
+    role: 'staff',
+    title: '',
+    phone: '',
+  });
 
   const loadAll = async () => {
     try {
       setLoading(true);
-      const [b, bk, p, s] = await Promise.all([
+      const [b, bk, p, s, u] = await Promise.all([
         fetchBlogs(),
         fetchBookings(),
         fetchPatients(),
-        fetchStats()
+        fetchStats(),
+        fetchUsers(),
       ]);
       setBlogs(b);
       setBookings(bk);
       setPatients(p);
       setStats(s);
-    } catch (e) {
-      console.error(e);
+      setTeam(u.filter((x) => x.role === 'doctor' || x.role === 'staff' || x.role === 'admin'));
+    } catch {
       showToast('Error loading admin portal', 'error');
     } finally {
       setLoading(false);
@@ -39,323 +59,255 @@ export const AdminDashboard: React.FC = () => {
     loadAll();
   }, [refreshCount]);
 
-  const handleDeleteBlog = async (id: string, title: string) => {
-    if (confirm(`Are you sure you want to delete "${title}"?`)) {
-      try {
-        await deleteBlog(id);
-        showToast('Blog article deleted', 'info');
-        loadAll();
-      } catch (e) {
-        showToast('Failed to delete blog', 'error');
-      }
-    }
-  };
+  const doctors = team.filter((u) => u.role === 'doctor');
+  const therapists = team.filter((u) => u.role === 'staff');
 
-  const handleBookingStatusChange = async (id: string, status: string) => {
+  const handleEnroll = async (bk: Booking) => {
+    const doctor = window.prompt('Assigned doctor name', doctors[0]?.name || 'Dr. Dharshan N A, MD (PMR)');
+    if (doctor === null) return;
+    const therapist = window.prompt('Assigned physiotherapist name', therapists[0]?.name || 'PT Rahul Sharma, MPT');
+    if (therapist === null) return;
     try {
-      await updateBookingStatus(id, status);
-      showToast(`Booking marked as ${status}`, 'success');
+      const res = await enrollBooking(bk.id, {
+        assignedDoctor: doctor,
+        assignedTherapist: therapist,
+        diagnosis: bk.serviceType || 'Home physiotherapy',
+        createPatientLogin: Boolean(bk.email),
+        patientPassword: 'patient123',
+      });
+      showToast(
+        res.patientUser
+          ? `Enrolled ${res.patient.name}. Patient login: ${res.patientUser.email} / patient123`
+          : `Enrolled ${res.patient.name}`,
+        'success'
+      );
+      triggerRefresh();
       loadAll();
-    } catch (e) {
-      showToast('Failed to update booking status', 'error');
+    } catch (e: any) {
+      showToast(e.message || 'Enroll failed', 'error');
     }
   };
 
-  const filteredBlogs = blogs.filter(b =>
-    b.title.toLowerCase().includes(blogSearch.toLowerCase()) ||
-    b.category.toLowerCase().includes(blogSearch.toLowerCase())
-  );
+  const handleAddUser = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await createUser(newUser);
+      showToast(`${newUser.role} added: ${newUser.name}`, 'success');
+      setNewUser({ name: '', email: '', password: '', role: 'staff', title: '', phone: '' });
+      loadAll();
+    } catch (err: any) {
+      showToast(err.message || 'Could not add user', 'error');
+    }
+  };
+
+  const pendingBookings = bookings.filter((b) => b.status !== 'Enrolled' && b.status !== 'Cancelled');
 
   return (
     <div className="bg-slate-50 min-h-screen pb-16">
-      {/* Top Banner */}
-      <div className="bg-gradient-to-r from-amber-950 via-slate-900 to-slate-900 text-white py-8 px-4 sm:px-6 lg:px-8 shadow-md">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-amber-600/50 border border-amber-400/40 p-1 flex items-center justify-center shadow-lg">
-              <ShieldCheck className="w-8 h-8 text-amber-300" />
+      <div className="bg-slate-900 text-white py-8 px-4 sm:px-6">
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-xl bg-amber-500/20 flex items-center justify-center">
+              <ShieldCheck className="w-6 h-6 text-amber-300" />
             </div>
             <div>
-              <div className="flex items-center gap-2">
-                <span className="text-xs font-bold uppercase tracking-wider text-amber-400">
-                  Platform Operations Console
-                </span>
-                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-400/30">
-                  Admin Access
-                </span>
-              </div>
-              <h1 className="text-xl sm:text-2xl font-black text-white mt-0.5">
-                Dr. Sameer Verma — Clinical Admin
-              </h1>
-              <p className="text-xs text-slate-300">
-                Manage Dynamic Blogs, Booking Inquiries, PMR Doctor Audits & Care Operations
-              </p>
+              <div className="text-xs font-semibold text-amber-300 uppercase tracking-wider">Admin</div>
+              <h1 className="text-xl font-bold">{currentUser?.name || 'Admin'}</h1>
+              <p className="text-xs text-slate-400">Bookings → enroll patients → team → blogs</p>
             </div>
           </div>
-
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => openModal('blog_editor')}
-              className="px-4 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-bold text-xs rounded-xl shadow-md transition flex items-center gap-2 cursor-pointer"
-            >
-              <Plus className="w-4 h-4" />
-              Publish Dynamic Blog
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={() => openModal('blog_editor')}
+            className="px-4 py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-900 font-semibold text-sm rounded-xl cursor-pointer inline-flex items-center gap-2"
+          >
+            <Plus className="w-4 h-4" /> New blog
+          </button>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 space-y-6">
-        {/* KPI Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
-            <div className="text-[10px] uppercase font-bold text-slate-400">Dynamic Blogs</div>
-            <div className="text-2xl font-black text-amber-600 mt-1">{blogs.length} Articles</div>
-            <div className="text-[11px] text-slate-500 mt-0.5">PMR & Physiatry Resources</div>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 mt-6 space-y-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="bg-white border border-slate-200 rounded-xl p-4">
+            <div className="text-[11px] text-slate-500 font-semibold uppercase">Open bookings</div>
+            <div className="text-2xl font-bold text-slate-900 mt-1">{pendingBookings.length}</div>
           </div>
-
-          <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
-            <div className="text-[10px] uppercase font-bold text-slate-400">Active Bookings</div>
-            <div className="text-2xl font-black text-teal-600 mt-1">{bookings.length} Requests</div>
-            <div className="text-[11px] text-slate-500 mt-0.5">Home Assessment Leads</div>
+          <div className="bg-white border border-slate-200 rounded-xl p-4">
+            <div className="text-[11px] text-slate-500 font-semibold uppercase">Patients</div>
+            <div className="text-2xl font-bold text-slate-900 mt-1">{patients.length}</div>
           </div>
-
-          <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
-            <div className="text-[10px] uppercase font-bold text-slate-400">Under Care</div>
-            <div className="text-2xl font-black text-indigo-600 mt-1">{patients.length} Active Patients</div>
-            <div className="text-[11px] text-slate-500 mt-0.5">Neuro & Orthopedic Rehab</div>
+          <div className="bg-white border border-slate-200 rounded-xl p-4">
+            <div className="text-[11px] text-slate-500 font-semibold uppercase">Team</div>
+            <div className="text-2xl font-bold text-slate-900 mt-1">{team.length}</div>
           </div>
-
-          <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
-            <div className="text-[10px] uppercase font-bold text-slate-400">PMR Review Compliance</div>
-            <div className="text-2xl font-black text-emerald-600 mt-1">100% Audit</div>
-            <div className="text-[11px] text-slate-500 mt-0.5">Physiatrist Sign-off SLA</div>
+          <div className="bg-white border border-slate-200 rounded-xl p-4">
+            <div className="text-[11px] text-slate-500 font-semibold uppercase">Blogs</div>
+            <div className="text-2xl font-bold text-slate-900 mt-1">{blogs.length}</div>
           </div>
         </div>
 
-        {/* Navigation Tabs */}
-        <div className="flex border-b border-slate-200 space-x-6 text-xs font-bold">
-          <button
-            onClick={() => setActiveTab('blogs')}
-            className={`pb-3 flex items-center gap-2 border-b-2 transition cursor-pointer ${
-              activeTab === 'blogs'
-                ? 'border-amber-600 text-amber-700'
-                : 'border-transparent text-slate-500 hover:text-slate-800'
-            }`}
-          >
-            <BookOpen className="w-4 h-4" />
-            Dynamic Blogs CMS ({blogs.length})
-          </button>
-
-          <button
-            onClick={() => setActiveTab('bookings')}
-            className={`pb-3 flex items-center gap-2 border-b-2 transition cursor-pointer ${
-              activeTab === 'bookings'
-                ? 'border-amber-600 text-amber-700'
-                : 'border-transparent text-slate-500 hover:text-slate-800'
-            }`}
-          >
-            <Calendar className="w-4 h-4" />
-            Assessment Bookings ({bookings.length})
-          </button>
-
-          <button
-            onClick={() => setActiveTab('patients')}
-            className={`pb-3 flex items-center gap-2 border-b-2 transition cursor-pointer ${
-              activeTab === 'patients'
-                ? 'border-amber-600 text-amber-700'
-                : 'border-transparent text-slate-500 hover:text-slate-800'
-            }`}
-          >
-            <Users className="w-4 h-4" />
-            Patient Admissions ({patients.length})
-          </button>
+        <div className="flex flex-wrap gap-1.5">
+          {([
+            ['bookings', 'Bookings', Calendar],
+            ['patients', 'Patients', Users],
+            ['team', 'Team', UserPlus],
+            ['blogs', 'Blogs', BookOpen],
+          ] as const).map(([id, label, Icon]) => (
+            <button
+              key={id}
+              type="button"
+              onClick={() => setTab(id)}
+              className={`px-3 py-2 rounded-lg text-xs font-semibold border inline-flex items-center gap-1.5 cursor-pointer ${
+                tab === id ? 'bg-slate-900 text-white border-slate-900' : 'bg-white text-slate-600 border-slate-200'
+              }`}
+            >
+              <Icon className="w-3.5 h-3.5" /> {label}
+            </button>
+          ))}
         </div>
 
-        {/* Tab 1: Dynamic Blogs CMS */}
-        {activeTab === 'blogs' && (
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
-            <div className="p-4 sm:p-5 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <div className="relative flex-1 max-w-md">
-                <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
-                <input
-                  type="text"
-                  placeholder="Search articles by title or specialty..."
-                  value={blogSearch}
-                  onChange={e => setBlogSearch(e.target.value)}
-                  className="w-full pl-9 pr-3 py-1.5 text-xs border border-slate-200 rounded-lg focus:ring-2 focus:ring-amber-500 bg-slate-50 focus:bg-white"
-                />
-              </div>
-
-              <button
-                onClick={() => openModal('blog_editor')}
-                className="px-3.5 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs rounded-lg transition flex items-center gap-1.5 cursor-pointer shadow-xs"
-              >
-                <Plus className="w-4 h-4" />
-                New Blog Post
-              </button>
-            </div>
-
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs">
-                <thead className="bg-slate-50 text-slate-600 font-bold border-b border-slate-100">
-                  <tr>
-                    <th className="p-3.5">Title & Lead</th>
-                    <th className="p-3.5">Category</th>
-                    <th className="p-3.5">Author</th>
-                    <th className="p-3.5">Views</th>
-                    <th className="p-3.5">Published</th>
-                    <th className="p-3.5 text-right">Actions</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100">
-                  {filteredBlogs.map(blog => (
-                    <tr key={blog.id} className="hover:bg-slate-50/70 transition">
-                      <td className="p-3.5 max-w-sm">
-                        <div className="font-bold text-slate-900 line-clamp-1">{blog.title}</div>
-                        <div className="text-[11px] text-slate-500 line-clamp-1 mt-0.5">{blog.summary}</div>
-                      </td>
-                      <td className="p-3.5">
-                        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-teal-50 text-teal-800 border border-teal-200">
-                          {blog.category}
-                        </span>
-                      </td>
-                      <td className="p-3.5">
-                        <div className="font-semibold text-slate-800">{blog.author?.name}</div>
-                        <div className="text-[10px] text-slate-400">{blog.author?.title}</div>
-                      </td>
-                      <td className="p-3.5 text-slate-600">
-                        <span className="flex items-center gap-1 font-semibold">
-                          <Eye className="w-3.5 h-3.5 text-slate-400" />
-                          {blog.views || 1}
-                        </span>
-                      </td>
-                      <td className="p-3.5 text-slate-500 text-[11px]">
-                        {blog.publishedAt}
-                      </td>
-                      <td className="p-3.5 text-right">
-                        <div className="flex items-center justify-end gap-1.5">
-                          <button
-                            onClick={() => openModal('blog_reader', blog)}
-                            title="Preview article"
-                            className="p-1.5 text-slate-500 hover:text-teal-600 hover:bg-slate-100 rounded-lg transition cursor-pointer"
-                          >
-                            <Eye className="w-4 h-4" />
-                          </button>
-                          <button
-                            onClick={() => openModal('blog_editor', blog)}
-                            title="Edit article"
-                            className="p-1.5 text-slate-500 hover:text-amber-600 hover:bg-slate-100 rounded-lg transition cursor-pointer"
-                          >
-                            <Edit className="w-4 h-4" />
-                          </button>
-                          <button
-                            onClick={() => handleDeleteBlog(blog.id, blog.title)}
-                            title="Delete article"
-                            className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition cursor-pointer"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        )}
-
-        {/* Tab 2: Bookings */}
-        {activeTab === 'bookings' && (
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
-            <div className="p-5 border-b border-slate-100">
-              <h3 className="text-base font-bold text-slate-900">
-                In-Home Assessment Requests & Physician Allocation
-              </h3>
-              <p className="text-xs text-slate-500 mt-0.5">
-                Prospective patients who booked home physiotherapy visits.
-              </p>
-            </div>
-
-            <div className="divide-y divide-slate-100">
-              {bookings.map(b => (
-                <div key={b.id} className="p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 text-xs">
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2">
-                      <span className="font-bold text-sm text-slate-900">{b.patientName}</span>
-                      <span className="text-slate-500">({b.phone})</span>
-                      <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${b.status === 'Confirmed' ? 'bg-teal-50 text-teal-800' : 'bg-amber-50 text-amber-800'}`}>
-                        {b.status}
-                      </span>
-                    </div>
-                    <div className="text-slate-600">
-                      <strong>Program:</strong> {b.serviceType} | <strong>Model:</strong> {b.doctorConsultation}
-                    </div>
-                    <div className="text-slate-500 text-[11px]">
-                      <strong>Address:</strong> {b.address} | <strong>Date:</strong> {b.preferredDate} ({b.preferredSlot})
-                    </div>
-                    {b.symptoms && (
-                      <div className="text-slate-600 bg-slate-50 p-2 rounded text-[11px] italic">
-                        "{b.symptoms}"
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="flex items-center gap-2 shrink-0">
-                    {b.status !== 'Assigned to Care Team' ? (
-                      <button
-                        onClick={() => handleBookingStatusChange(b.id, 'Assigned to Care Team')}
-                        className="px-3 py-1.5 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-lg text-xs cursor-pointer shadow-xs"
-                      >
-                        Assign PT & PMR Doctor
-                      </button>
-                    ) : (
-                      <span className="text-teal-700 font-bold flex items-center gap-1 text-xs">
-                        <CheckCircle2 className="w-4 h-4" /> Assigned
-                      </span>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Tab 3: Patient Admissions */}
-        {activeTab === 'patients' && (
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
-            <div className="p-5 border-b border-slate-100">
-              <h3 className="text-base font-bold text-slate-900">
-                Active Rehabilitation Admissions
-              </h3>
+        {loading ? (
+          <p className="text-slate-500 text-sm">Loading…</p>
+        ) : tab === 'bookings' ? (
+          <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden">
+            <div className="px-4 py-3 border-b border-slate-100 text-sm font-semibold text-slate-800">
+              Assessment bookings (from website form)
             </div>
             <div className="divide-y divide-slate-100">
-              {patients.map(p => (
-                <div key={p.id} className="p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 text-xs">
+              {bookings.length === 0 && <p className="p-4 text-sm text-slate-500">No bookings yet.</p>}
+              {bookings.map((bk) => (
+                <div key={bk.id} className="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div>
-                    <div className="font-bold text-sm text-slate-900">{p.name} ({p.age}y {p.gender})</div>
-                    <div className="text-slate-600 mt-0.5">{p.diagnosis}</div>
-                    <div className="text-slate-500 text-[11px] mt-1">
-                      Attending PMR: <strong>{p.assignedDoctor}</strong> | PT: <strong>{p.assignedTherapist}</strong>
+                    <div className="font-semibold text-slate-900">{bk.patientName}</div>
+                    <div className="text-xs text-slate-500 mt-0.5">
+                      {bk.phone} · {bk.email || 'no email'} · {bk.serviceType}
                     </div>
+                    <div className="text-xs text-slate-500">
+                      {bk.preferredDate} {bk.preferredSlot} · Status: <strong>{bk.status}</strong>
+                    </div>
+                    {bk.address && <div className="text-xs text-slate-400 mt-0.5">{bk.address}</div>}
                   </div>
-                  <div className="flex items-center gap-4 text-right">
-                    <div>
-                      <div className="text-[10px] text-slate-400 uppercase font-bold">Recovery Trajectory</div>
-                      <div className="font-black text-lg text-teal-600">{p.recoveryScore}%</div>
-                    </div>
+                  <div className="flex flex-wrap gap-2">
+                    {bk.status !== 'Enrolled' && (
+                      <button
+                        type="button"
+                        onClick={() => handleEnroll(bk)}
+                        className="px-3 py-2 bg-teal-700 text-white text-xs font-semibold rounded-lg cursor-pointer"
+                      >
+                        Enroll as patient
+                      </button>
+                    )}
                     <button
-                      onClick={() => openModal('clinical_report', { patient: p, sessions: [] })}
-                      className="px-3 py-1.5 border border-slate-200 rounded-lg text-slate-700 hover:bg-slate-50 font-semibold cursor-pointer"
+                      type="button"
+                      onClick={async () => {
+                        await updateBookingStatus(bk.id, 'Confirmed');
+                        showToast('Marked confirmed', 'success');
+                        loadAll();
+                      }}
+                      className="px-3 py-2 border border-slate-200 text-xs font-semibold rounded-lg cursor-pointer"
                     >
-                      View Report
+                      Confirm
+                    </button>
+                    <button
+                      type="button"
+                      onClick={async () => {
+                        await updateBookingStatus(bk.id, 'Cancelled');
+                        showToast('Cancelled', 'info');
+                        loadAll();
+                      }}
+                      className="px-3 py-2 border border-rose-200 text-rose-700 text-xs font-semibold rounded-lg cursor-pointer"
+                    >
+                      Cancel
                     </button>
                   </div>
                 </div>
               ))}
             </div>
           </div>
+        ) : tab === 'patients' ? (
+          <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden">
+            <div className="px-4 py-3 border-b border-slate-100 text-sm font-semibold">Active patients</div>
+            <div className="divide-y divide-slate-100">
+              {patients.map((p) => (
+                <div key={p.id} className="p-4">
+                  <div className="font-semibold text-slate-900">{p.name}</div>
+                  <div className="text-xs text-slate-500 mt-1">{p.diagnosis}</div>
+                  <div className="text-xs text-slate-600 mt-1">
+                    Doctor: <strong>{p.assignedDoctor}</strong> · Physio: <strong>{p.assignedTherapist}</strong>
+                  </div>
+                  <div className="text-xs text-slate-500 mt-1">
+                    Sessions {p.sessionsCompleted}/{p.totalSessionsPlanned} · VAS {p.currentVAS}/10 · {p.status}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : tab === 'team' ? (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div className="bg-white border border-slate-200 rounded-2xl p-4">
+              <h3 className="font-semibold text-slate-900 mb-3">Add doctor or physiotherapist</h3>
+              <form onSubmit={handleAddUser} className="space-y-3">
+                <input className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm" placeholder="Full name" required value={newUser.name} onChange={(e) => setNewUser({ ...newUser, name: e.target.value })} />
+                <input className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm" placeholder="Email (login)" type="email" required value={newUser.email} onChange={(e) => setNewUser({ ...newUser, email: e.target.value })} />
+                <input className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm" placeholder="Temporary password" required value={newUser.password} onChange={(e) => setNewUser({ ...newUser, password: e.target.value })} />
+                <select className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm" value={newUser.role} onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}>
+                  <option value="staff">Physiotherapist</option>
+                  <option value="doctor">Doctor (PMR)</option>
+                  <option value="admin">Admin</option>
+                </select>
+                <input className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm" placeholder="Title (optional)" value={newUser.title} onChange={(e) => setNewUser({ ...newUser, title: e.target.value })} />
+                <input className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm" placeholder="Phone (optional)" value={newUser.phone} onChange={(e) => setNewUser({ ...newUser, phone: e.target.value })} />
+                <button type="submit" className="w-full py-2.5 bg-teal-700 text-white text-sm font-semibold rounded-xl cursor-pointer">
+                  Add team member
+                </button>
+              </form>
+            </div>
+            <div className="bg-white border border-slate-200 rounded-2xl p-4">
+              <h3 className="font-semibold text-slate-900 mb-3">Team directory</h3>
+              <div className="space-y-2">
+                {team.map((u) => (
+                  <div key={u.id} className="border border-slate-100 rounded-xl p-3">
+                    <div className="font-medium text-slate-900 text-sm">{u.name}</div>
+                    <div className="text-xs text-slate-500">{u.role} · {u.email}</div>
+                    {u.title && <div className="text-xs text-slate-400">{u.title}</div>}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden">
+            <div className="px-4 py-3 border-b border-slate-100 text-sm font-semibold">Blogs</div>
+            <div className="divide-y divide-slate-100">
+              {blogs.map((b) => (
+                <div key={b.id} className="p-4 flex items-center justify-between gap-3">
+                  <div>
+                    <div className="font-medium text-slate-900 text-sm">{b.title}</div>
+                    <div className="text-xs text-slate-500">{b.category}</div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      if (confirm('Delete this blog?')) {
+                        await deleteBlog(b.id);
+                        showToast('Deleted', 'info');
+                        loadAll();
+                      }
+                    }}
+                    className="text-xs text-rose-600 font-semibold cursor-pointer"
+                  >
+                    Delete
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {stats && (
+          <p className="text-xs text-slate-400">
+            System: {stats.activePatients} active patients · {stats.pendingReviews} sessions pending doctor review
+          </p>
         )}
       </div>
     </div>

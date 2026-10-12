@@ -451,6 +451,129 @@ app.put('/api/bookings/:id/status', (req, res) => {
   res.json(bk);
 });
 
+
+// Create team user (doctor / staff / admin)
+app.post('/api/users', (req, res) => {
+  const db = loadDb();
+  const { email, password, name, role, title, phone, credentials, registrationNo } = req.body;
+  if (!email || !password || !name || !role) {
+    return res.status(400).json({ error: 'email, password, name and role are required' });
+  }
+  if (!['doctor', 'staff', 'admin', 'patient'].includes(role)) {
+    return res.status(400).json({ error: 'Invalid role' });
+  }
+  if (db.users.some(u => u.email.toLowerCase() === email.toLowerCase())) {
+    return res.status(400).json({ error: 'Email already registered' });
+  }
+  const user = {
+    id: `usr-${role}-${Date.now()}`,
+    email: email.trim(),
+    password,
+    name,
+    role,
+    title: title || (role === 'doctor' ? 'PMR Doctor' : role === 'staff' ? 'Physiotherapist' : role),
+    phone: phone || '',
+    credentials: credentials || '',
+    registrationNo: registrationNo || '',
+    avatar: ''
+  };
+  db.users.push(user);
+  saveDb(db);
+  const safe = { ...user };
+  delete safe.password;
+  res.status(201).json(safe);
+});
+
+// Update own / admin profile
+app.put('/api/users/:id', (req, res) => {
+  const db = loadDb();
+  const idx = db.users.findIndex(u => u.id === req.params.id);
+  if (idx === -1) return res.status(404).json({ error: 'User not found' });
+  const allowed = ['name', 'title', 'phone', 'credentials', 'registrationNo', 'bio', 'avatar', 'password'];
+  for (const key of allowed) {
+    if (req.body[key] !== undefined && req.body[key] !== '') {
+      db.users[idx][key] = req.body[key];
+    }
+  }
+  saveDb(db);
+  const safe = { ...db.users[idx] };
+  delete safe.password;
+  res.json(safe);
+});
+
+// Enroll booking as active patient + optional patient login
+app.post('/api/bookings/:id/enroll', (req, res) => {
+  const db = loadDb();
+  const booking = db.bookings.find(b => b.id === req.params.id);
+  if (!booking) return res.status(404).json({ error: 'Booking not found' });
+
+  const {
+    assignedDoctor = 'Dr. Dharshan N A, MD (PMR)',
+    assignedTherapist = 'PT Rahul Sharma, MPT',
+    diagnosis = booking.serviceType || 'Home physiotherapy assessment',
+    createPatientLogin = true,
+    patientPassword = 'patient123'
+  } = req.body || {};
+
+  const patientId = `pat-${Date.now()}`;
+  const patient = {
+    id: patientId,
+    name: booking.patientName,
+    age: Number(req.body.age) || 0,
+    gender: req.body.gender || '',
+    phone: booking.phone || '',
+    email: booking.email || '',
+    address: booking.address || '',
+    diagnosis,
+    surgeryDate: req.body.surgeryDate || '',
+    postOpDay: 0,
+    primarySurgeon: req.body.primarySurgeon || '',
+    assignedDoctor,
+    assignedTherapist,
+    status: 'Active Recovery',
+    recoveryScore: 50,
+    targetROM: req.body.targetROM || 'As per plan',
+    currentROM: 'Baseline pending',
+    baselineVAS: Number(req.body.baselineVAS) || 5,
+    currentVAS: Number(req.body.baselineVAS) || 5,
+    totalSessionsPlanned: Number(req.body.totalSessionsPlanned) || 12,
+    sessionsCompleted: 0,
+    clinicalGoals: Array.isArray(req.body.clinicalGoals) ? req.body.clinicalGoals : ['Complete baseline assessment', 'Follow home exercise plan']
+  };
+  db.patients.unshift(patient);
+
+  booking.status = 'Enrolled';
+  booking.patientId = patientId;
+  booking.assignedDoctor = assignedDoctor;
+  booking.assignedTherapist = assignedTherapist;
+
+  let patientUser = null;
+  if (createPatientLogin && booking.email) {
+    const existing = db.users.find(u => u.email.toLowerCase() === booking.email.toLowerCase());
+    if (!existing) {
+      patientUser = {
+        id: `usr-pat-${Date.now()}`,
+        email: booking.email,
+        password: patientPassword,
+        name: booking.patientName,
+        role: 'patient',
+        patientId,
+        phone: booking.phone || ''
+      };
+      db.users.push(patientUser);
+    } else {
+      existing.patientId = patientId;
+      existing.role = 'patient';
+      patientUser = existing;
+    }
+  }
+
+  saveDb(db);
+  const safeUser = patientUser ? { ...patientUser } : null;
+  if (safeUser) delete safeUser.password;
+  res.status(201).json({ patient, booking, patientUser: safeUser });
+});
+
 app.post('/api/reset', (req, res) => {
   try {
     const initial = fs.readFileSync(INITIAL_DATA_FILE, 'utf-8');

@@ -8,11 +8,13 @@ import { StaffDashboard } from './StaffDashboard';
 import { PatientDashboard } from './PatientDashboard';
 import { AdminDashboard } from './AdminDashboard';
 import { LoginModal } from './LoginModal';
+import { BookAssessmentModal } from './BookAssessmentModal';
 import { LogSessionModal } from './LogSessionModal';
 import { DoctorReviewModal } from './DoctorReviewModal';
 import { BlogReaderModal } from './BlogReaderModal';
 import { BlogEditorModal } from './BlogEditorModal';
 import { ClinicalReportModal } from './ClinicalReportModal';
+import { ProfileModal } from './ProfileModal';
 import { ToastContainer } from './ToastContainer';
 
 export const AppContent: React.FC = () => {
@@ -45,11 +47,13 @@ export const AppContent: React.FC = () => {
       {view === 'public' && <Footer />}
 
       <LoginModal />
+      <BookAssessmentModal />
       <LogSessionModal />
       <DoctorReviewModal />
       <BlogReaderModal />
       <BlogEditorModal />
       <ClinicalReportModal />
+      <ProfileModal />
       <ToastContainer />
     </div>
   );

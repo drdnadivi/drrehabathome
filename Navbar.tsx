@@ -111,6 +111,15 @@ export const Navbar: React.FC = () => {
                     <button
                       onClick={() => {
                         setUserDropdown(false);
+                        openModal('profile');
+                      }}
+                      className="w-full text-left px-4 py-2.5 text-sm text-slate-700 hover:bg-teal-50 hover:text-teal-800 font-medium"
+                    >
+                      Update profile
+                    </button>
+                    <button
+                      onClick={() => {
+                        setUserDropdown(false);
                         switchRole('public');
                       }}
                       className="w-full text-left px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 font-medium"

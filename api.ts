@@ -158,3 +158,51 @@ export async function resetDatabase(): Promise<any> {
   if (!res.ok) throw new Error('Failed to reset database');
   return res.json();
 }
+
+export async function createUser(data: {
+  email: string;
+  password: string;
+  name: string;
+  role: string;
+  title?: string;
+  phone?: string;
+  credentials?: string;
+  registrationNo?: string;
+}): Promise<User> {
+  const res = await fetch(`${BASE_URL}/users`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.error || 'Failed to create user');
+  }
+  return res.json();
+}
+
+export async function updateUser(id: string, data: Record<string, any>): Promise<User> {
+  const res = await fetch(`${BASE_URL}/users/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error('Failed to update profile');
+  return res.json();
+}
+
+export async function enrollBooking(
+  bookingId: string,
+  data: Record<string, any> = {}
+): Promise<{ patient: Patient; booking: Booking; patientUser: User | null }> {
+  const res = await fetch(`${BASE_URL}/bookings/${bookingId}/enroll`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.error || 'Failed to enroll patient');
+  }
+  return res.json();
+}

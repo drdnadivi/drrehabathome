@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { User, UserRole, Blog, Session, Patient } from './types';
 import { fetchUsers } from './api';
-import { openWhatsAppBooking } from './config';
 
 interface Toast {
   id: string;
@@ -69,11 +68,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const triggerRefresh = () => setRefreshCount((c) => c + 1);
 
   const openModal = (modal: string, payload: any = null) => {
-    // Public booking always goes to WhatsApp — no demo form.
-    if (modal === 'book') {
-      openWhatsAppBooking(typeof payload === 'string' ? payload : undefined);
-      return;
-    }
     setActiveModal(modal);
     setModalPayload(payload);
   };
