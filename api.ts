@@ -206,3 +206,53 @@ export async function enrollBooking(
   }
   return res.json();
 }
+
+
+export async function submitBaselineAssessment(patientId: string, data: Record<string, any>) {
+  const res = await fetch(`${BASE_URL}/patients/${patientId}/baseline`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.error || 'Failed to save baseline assessment');
+  }
+  return res.json();
+}
+
+export async function updatePrescribedTools(patientId: string, tools: string[], extra: Record<string, any> = {}) {
+  const res = await fetch(`${BASE_URL}/patients/${patientId}/prescribed-tools`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ tools, ...extra }),
+  });
+  if (!res.ok) throw new Error('Failed to update prescribed tools');
+  return res.json();
+}
+
+
+export async function uploadPatientDocument(patientId: string, data: Record<string, any>) {
+  const res = await fetch(`${BASE_URL}/patients/${patientId}/documents`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.error || 'Upload failed');
+  }
+  return res.json();
+}
+
+export async function fetchPatientDocuments(patientId: string) {
+  const res = await fetch(`${BASE_URL}/patients/${patientId}/documents`);
+  if (!res.ok) throw new Error('Failed to load documents');
+  return res.json();
+}
+
+export async function fetchPatientDocument(patientId: string, docId: string) {
+  const res = await fetch(`${BASE_URL}/patients/${patientId}/documents/${docId}`);
+  if (!res.ok) throw new Error('Failed to open document');
+  return res.json();
+}

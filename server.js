@@ -7,6 +7,68 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+
+function detectPathway(diagnosis) {
+  const d = (diagnosis || '').toLowerCase();
+  const paths = [
+    { id: 'knee', keys: ['knee','tkr','tka','acl','meniscus'],
+      measures: [
+        { key: 'vas', label: 'Pain VAS', unit: '0-10', decisionRule: 'Patient-reported pain; primary comfort outcome.' },
+        { key: 'flexion', label: 'Active knee flexion', unit: 'degrees', decisionRule: 'Goniometer; Day 14 aim ~90.' },
+        { key: 'extension', label: 'Extension lag', unit: 'degrees', decisionRule: 'Lag from 0; >5 triggers review.' },
+        { key: 'walkAid', label: 'Walking aid stage', unit: 'level', decisionRule: 'Walker to stick to independent.' }
+      ],
+      tools: ['Digital goniometer','TheraBand','Ankle weights','NMES unit','Cryotherapy pack'] },
+    { id: 'hip', keys: ['hip','thr','tha'],
+      measures: [
+        { key: 'vas', label: 'Pain VAS', unit: '0-10', decisionRule: 'Patient-reported pain.' },
+        { key: 'walkAid', label: 'Walking aid stage', unit: 'level', decisionRule: 'Progress weight-bearing as cleared.' },
+        { key: 'precaution', label: 'Precaution adherence', unit: 'yes/no', decisionRule: 'Hip precaution compliance.' }
+      ],
+      tools: ['Goniometer','Loop bands','Cryotherapy wrap','Vitals kit'] },
+    { id: 'stroke', keys: ['stroke','neuro','hemip','parkinson'],
+      measures: [
+        { key: 'tone', label: 'Tone', unit: '0-4', decisionRule: 'Clinical tone estimate.' },
+        { key: 'balance', label: 'Standing balance', unit: 'seconds', decisionRule: 'Timed stand as safe.' },
+        { key: 'mobility', label: 'Mobility stage', unit: 'level', decisionRule: 'Bed to chair to walk.' }
+      ],
+      tools: ['NMES unit','Positioning pillows','Balance tools','Gait belt'] },
+    { id: 'shoulder', keys: ['shoulder','rotator','frozen','cuff'],
+      measures: [
+        { key: 'vas', label: 'Pain VAS', unit: '0-10', decisionRule: 'Include night pain.' },
+        { key: 'elevation', label: 'Active elevation', unit: 'degrees', decisionRule: 'Goniometer elevation.' },
+        { key: 'externalRot', label: 'External rotation', unit: 'degrees', decisionRule: 'As tolerated.' }
+      ],
+      tools: ['Goniometer','Wand / stick','Light bands','Ice pack'] },
+    { id: 'spine', keys: ['spine','lumbar','sciatica','disc','back'],
+      measures: [
+        { key: 'vasBack', label: 'Back pain VAS', unit: '0-10', decisionRule: 'Back component.' },
+        { key: 'vasLeg', label: 'Leg pain VAS', unit: '0-10', decisionRule: 'Leg component.' },
+        { key: 'sitTol', label: 'Sitting tolerance', unit: 'minutes', decisionRule: 'Functional tolerance.' }
+      ],
+      tools: ['Resistance bands','Timer for pacing','Heat/ice as advised'] },
+    { id: 'geriatric', keys: ['fall','geriatric','elderly','balance','frailty'],
+      measures: [
+        { key: 'tug', label: 'Timed Up & Go', unit: 'seconds', decisionRule: 'Higher = higher fall risk.' },
+        { key: 'sitStand', label: '30s sit-to-stand', unit: 'reps', decisionRule: 'Strength proxy.' },
+        { key: 'vas', label: 'Pain VAS', unit: '0-10', decisionRule: 'If limiting mobility.' }
+      ],
+      tools: ['Balance pad','Chair support','Resistance bands','Gait belt'] },
+    { id: 'general', keys: [],
+      measures: [
+        { key: 'vas', label: 'Pain VAS', unit: '0-10', decisionRule: 'Primary symptom score.' },
+        { key: 'function', label: 'Function note', unit: 'text', decisionRule: 'Key activity limitation.' }
+      ],
+      tools: ['Goniometer','Resistance bands','Vitals kit'] }
+  ];
+  for (const p of paths) {
+    if (p.id === 'general') continue;
+    if (p.keys.some(k => d.includes(k))) return p;
+  }
+  return paths[paths.length - 1];
+}
+
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 const DB_FILE = path.join(__dirname, 'db.json');
@@ -516,6 +578,7 @@ app.post('/api/bookings/:id/enroll', (req, res) => {
   } = req.body || {};
 
   const patientId = `pat-${Date.now()}`;
+  const pathway = detectPathway(diagnosis);
   const patient = {
     id: patientId,
     name: booking.patientName,
@@ -530,15 +593,21 @@ app.post('/api/bookings/:id/enroll', (req, res) => {
     primarySurgeon: req.body.primarySurgeon || '',
     assignedDoctor,
     assignedTherapist,
-    status: 'Active Recovery',
-    recoveryScore: 50,
-    targetROM: req.body.targetROM || 'As per plan',
-    currentROM: 'Baseline pending',
-    baselineVAS: Number(req.body.baselineVAS) || 5,
-    currentVAS: Number(req.body.baselineVAS) || 5,
+    status: 'Awaiting Baseline Assessment',
+    recoveryScore: 0,
+    targetROM: req.body.targetROM || 'Set after baseline',
+    currentROM: 'Not assessed',
+    baselineVAS: null,
+    currentVAS: null,
     totalSessionsPlanned: Number(req.body.totalSessionsPlanned) || 12,
     sessionsCompleted: 0,
-    clinicalGoals: Array.isArray(req.body.clinicalGoals) ? req.body.clinicalGoals : ['Complete baseline assessment', 'Follow home exercise plan']
+    clinicalGoals: Array.isArray(req.body.clinicalGoals) ? req.body.clinicalGoals : ['Complete baseline assessment', 'Establish outcome measures', 'Begin treatment plan'],
+    needsBaselineAssessment: true,
+    pathwayId: pathway.id,
+    suggestedTools: pathway.tools.slice(),
+    prescribedTools: [],
+    outcomeMeasureDefs: pathway.measures,
+    baselineMeasures: {}
   };
   db.patients.unshift(patient);
 
@@ -572,6 +641,143 @@ app.post('/api/bookings/:id/enroll', (req, res) => {
   const safeUser = patientUser ? { ...patientUser } : null;
   if (safeUser) delete safeUser.password;
   res.status(201).json({ patient, booking, patientUser: safeUser });
+});
+
+
+// Physio session 1: baseline assessment (fills empty baselines)
+app.post('/api/patients/:id/baseline', (req, res) => {
+  const db = loadDb();
+  const patient = db.patients.find(p => p.id === req.params.id);
+  if (!patient) return res.status(404).json({ error: 'Patient not found' });
+
+  const {
+    measures = {},
+    vas = null,
+    currentROM = '',
+    targetROM = '',
+    therapistNotes = '',
+    therapistName = 'Physiotherapist',
+    toolsUsed = [],
+    selectedOutcomeTools = [],
+    outcomeScores = {}
+  } = req.body || {};
+
+  const vasNum = vas === null || vas === '' ? null : Number(vas);
+  patient.baselineMeasures = measures;
+  patient.selectedOutcomeTools = selectedOutcomeTools;
+  patient.outcomeScores = outcomeScores;
+  patient.baselineVAS = vasNum;
+  patient.currentVAS = vasNum;
+  if (currentROM) patient.currentROM = currentROM;
+  if (targetROM) patient.targetROM = targetROM;
+  patient.needsBaselineAssessment = false;
+  patient.baselineCompletedAt = new Date().toISOString();
+  patient.status = 'Active Recovery';
+  patient.recoveryScore = 40;
+  patient.sessionsCompleted = (patient.sessionsCompleted || 0) + 1;
+
+  const session = {
+    id: `ses-base-${patient.id}-${Date.now()}`,
+    patientId: patient.id,
+    patientName: patient.name,
+    sessionNumber: 1,
+    sessionType: 'baseline_assessment',
+    date: new Date().toISOString().split('T')[0],
+    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+    therapistName,
+    vitals: req.body.vitals || { bp: '', pulse: '', spo2: '' },
+    painScoreVAS: vasNum ?? 0,
+    romMeasurements: measures,
+    exercisesPerformed: [],
+    functionalMobility: req.body.functionalMobility || 'Baseline assessment only',
+    therapistNotes: therapistNotes || 'Baseline assessment completed',
+    toolsUsed,
+    selectedOutcomeTools,
+    outcomeScores,
+    pmrDoctorStatus: 'pending_review',
+    pmrDoctorName: patient.assignedDoctor || 'Dr. Dharshan N A, MD (PMR)',
+    pmrDoctorNotes: '',
+    pmrDoctorAction: 'Review baseline and prescribe tools for session 2+',
+    flaggedUrgent: Boolean(req.body.flaggedUrgent),
+    complianceRate: 'N/A'
+  };
+  db.sessions.unshift(session);
+  saveDb(db);
+  res.status(201).json({ patient, session });
+});
+
+// Doctor sets prescribed tools for session 2+
+app.put('/api/patients/:id/prescribed-tools', (req, res) => {
+  const db = loadDb();
+  const patient = db.patients.find(p => p.id === req.params.id);
+  if (!patient) return res.status(404).json({ error: 'Patient not found' });
+  const tools = Array.isArray(req.body.tools) ? req.body.tools : [];
+  patient.prescribedTools = tools;
+  if (req.body.clinicalGoals) patient.clinicalGoals = req.body.clinicalGoals;
+  if (req.body.targetROM) patient.targetROM = req.body.targetROM;
+  saveDb(db);
+  res.json(patient);
+});
+
+
+// Physio/doctor uploads clinical document (e.g. discharge summary) — stored as base64 metadata in DB
+app.post('/api/patients/:id/documents', (req, res) => {
+  const db = loadDb();
+  const patient = db.patients.find(p => p.id === req.params.id);
+  if (!patient) return res.status(404).json({ error: 'Patient not found' });
+
+  const { fileName, mimeType, dataBase64, docType, notes, uploadedBy } = req.body || {};
+  if (!fileName || !dataBase64) {
+    return res.status(400).json({ error: 'fileName and dataBase64 are required' });
+  }
+  // ~1.5MB decoded safety limit for demo store
+  if (String(dataBase64).length > 2_100_000) {
+    return res.status(400).json({ error: 'File too large (max ~1.5MB for current storage)' });
+  }
+
+  if (!patient.documents) patient.documents = [];
+  const doc = {
+    id: `doc-${Date.now()}`,
+    docType: docType || 'discharge_summary',
+    fileName,
+    mimeType: mimeType || 'application/octet-stream',
+    dataBase64,
+    notes: notes || '',
+    uploadedBy: uploadedBy || 'Staff',
+    uploadedAt: new Date().toISOString()
+  };
+  patient.documents.unshift(doc);
+  saveDb(db);
+  // Do not echo full base64 back in list responses ideally — return meta
+  const meta = { ...doc };
+  delete meta.dataBase64;
+  res.status(201).json(meta);
+});
+
+app.get('/api/patients/:id/documents', (req, res) => {
+  const db = loadDb();
+  const patient = db.patients.find(p => p.id === req.params.id);
+  if (!patient) return res.status(404).json({ error: 'Patient not found' });
+  const list = (patient.documents || []).map(d => ({
+    id: d.id,
+    docType: d.docType,
+    fileName: d.fileName,
+    mimeType: d.mimeType,
+    notes: d.notes,
+    uploadedBy: d.uploadedBy,
+    uploadedAt: d.uploadedAt,
+    hasFile: Boolean(d.dataBase64)
+  }));
+  res.json(list);
+});
+
+app.get('/api/patients/:id/documents/:docId', (req, res) => {
+  const db = loadDb();
+  const patient = db.patients.find(p => p.id === req.params.id);
+  if (!patient) return res.status(404).json({ error: 'Patient not found' });
+  const doc = (patient.documents || []).find(d => d.id === req.params.docId);
+  if (!doc) return res.status(404).json({ error: 'Document not found' });
+  res.json(doc);
 });
 
 app.post('/api/reset', (req, res) => {

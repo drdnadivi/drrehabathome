@@ -34,11 +34,21 @@ export interface Patient {
   recoveryScore: number;
   targetROM: string;
   currentROM: string;
-  baselineVAS: number;
-  currentVAS: number;
+  baselineVAS: number | null;
+  currentVAS: number | null;
   totalSessionsPlanned: number;
   sessionsCompleted: number;
   clinicalGoals: string[];
+  /** true until physio completes baseline assessment (session 1) */
+  needsBaselineAssessment?: boolean;
+  pathwayId?: string;
+  /** Auto-suggested at enroll; doctor can edit */
+  suggestedTools?: string[];
+  /** Doctor-approved tools for session 2+ */
+  prescribedTools?: string[];
+  outcomeMeasureDefs?: { key: string; label: string; unit: string; decisionRule: string }[];
+  baselineMeasures?: Record<string, string | number>;
+  baselineCompletedAt?: string;
   sessions?: Session[];
   exercises?: Exercise[];
 }

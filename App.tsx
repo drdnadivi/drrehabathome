@@ -15,6 +15,9 @@ import { BlogReaderModal } from './BlogReaderModal';
 import { BlogEditorModal } from './BlogEditorModal';
 import { ClinicalReportModal } from './ClinicalReportModal';
 import { ProfileModal } from './ProfileModal';
+import { BaselineAssessmentModal } from './BaselineAssessmentModal';
+import { PrescribeToolsModal } from './PrescribeToolsModal';
+import { DocumentUploadModal } from './DocumentUploadModal';
 import { ToastContainer } from './ToastContainer';
 
 export const AppContent: React.FC = () => {
@@ -54,6 +57,9 @@ export const AppContent: React.FC = () => {
       <BlogEditorModal />
       <ClinicalReportModal />
       <ProfileModal />
+      <BaselineAssessmentModal />
+      <PrescribeToolsModal />
+      <DocumentUploadModal />
       <ToastContainer />
     </div>
   );

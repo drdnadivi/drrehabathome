@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useApp } from './AppContext';
 import { Stethoscope, CheckCircle2, AlertTriangle, Clock, ArrowRight, ShieldCheck, Activity, Users, FileText, Filter, RefreshCw } from 'lucide-react';
-import { fetchSessions, fetchPatients, fetchStats } from './api';
+import { fetchSessions, fetchPatients, fetchStats, fetchPatientDocuments, fetchPatientDocument } from './api';
 import { Session, Patient, SystemStats } from './types';
 
 export const DoctorDashboard: React.FC = () => {
@@ -96,6 +96,20 @@ export const DoctorDashboard: React.FC = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 space-y-6">
+        <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="text-sm text-indigo-950">
+            <strong>After baseline:</strong> prescribe tools so physio can treat from session 2. Outcome measures follow the pathway (knee ROM/VAS, etc.).
+          </div>
+          <div className="flex gap-2 flex-wrap">
+            <button type="button" onClick={() => openModal('prescribe_tools')} className="px-4 py-2 bg-indigo-700 text-white text-xs font-semibold rounded-lg cursor-pointer shrink-0">
+              Prescribe tools
+            </button>
+            <button type="button" onClick={() => openModal('upload_document')} className="px-4 py-2 bg-white border border-indigo-200 text-indigo-900 text-xs font-semibold rounded-lg cursor-pointer shrink-0">
+              View / upload documents
+            </button>
+          </div>
+        </div>
+
         {/* Core USP Alert Box */}
         <div className="bg-indigo-50 border-l-4 border-indigo-600 p-4 rounded-r-xl shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <div className="flex items-start gap-3">
@@ -160,7 +174,7 @@ export const DoctorDashboard: React.FC = () => {
                 <div className="flex items-start justify-between">
                   <div>
                     <div className="text-sm font-bold text-slate-900">{p.name}</div>
-                    <div className="text-[11px] text-slate-500">{p.age}y {p.gender} | {p.diagnosis}</div>
+                    <div className="text-[11px] text-slate-500">{p.age}y {p.gender} | {p.diagnosis}{(p as any).selectedOutcomeTools?.length ? ` · Tools: ${(p as any).selectedOutcomeTools.join(", ")}` : ""}</div>
                   </div>
                   <span className="text-xs font-black px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded-md border border-indigo-100">
                     {p.recoveryScore}%
