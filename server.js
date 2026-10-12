@@ -74,7 +74,7 @@ app.post('/api/auth/login', (req, res) => {
   const db = loadDb();
   const user = db.users.find(u => u.email.toLowerCase() === (email || '').toLowerCase().trim());
 
-  if (!user || (password && user.password !== password && password !== 'demo123')) {
+  if (!user || !password || user.password !== password) {
     return res.status(401).json({ error: 'Invalid email or password' });
   }
 

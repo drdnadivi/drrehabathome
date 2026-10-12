@@ -3,7 +3,7 @@ import { useApp } from './AppContext';
 import { Stethoscope, Calendar, LogIn, Menu, X, Award, User, ChevronDown } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
-  const { currentRole, currentUser, switchRole, openModal } = useApp();
+  const { currentRole, currentUser, switchRole, openModal, logout } = useApp();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userDropdown, setUserDropdown] = useState(false);
 
@@ -30,7 +30,7 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <header className="bg-white/95 backdrop-blur-md sticky top-[37px] z-40 border-b border-slate-100/80">
+    <header className="bg-white/95 backdrop-blur-md sticky top-0 z-40 border-b border-slate-100/80">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-[4.25rem]">
           
@@ -115,7 +115,16 @@ export const Navbar: React.FC = () => {
                       }}
                       className="w-full text-left px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 font-medium"
                     >
-                      View Public Website
+                      View public website
+                    </button>
+                    <button
+                      onClick={() => {
+                        setUserDropdown(false);
+                        logout();
+                      }}
+                      className="w-full text-left px-4 py-2.5 text-sm text-rose-600 hover:bg-rose-50 font-medium"
+                    >
+                      Sign out
                     </button>
                   </div>
                 )}
