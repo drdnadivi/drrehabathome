@@ -1,12 +1,10 @@
 import React from 'react';
-import { MapPin, Zap, Clock } from 'lucide-react';
+import { MapPin, Zap, Clock, Phone } from 'lucide-react';
 import { useApp } from './AppContext';
 import { DISPLAY_PHONE } from './config';
 
 export const ServiceAreasSection: React.FC = () => {
   const { openModal } = useApp();
-
-  const priority = ['Lalbagh', 'Malleshwaram', 'Bannerghatta Road', 'Majestic'];
 
   return (
     <section id="service-areas" className="py-14 lg:py-16 bg-white border-y border-slate-100">
@@ -20,15 +18,26 @@ export const ServiceAreasSection: React.FC = () => {
               Home visits across Bengaluru
             </h2>
             <p className="text-[15px] text-slate-600 mt-3 leading-relaxed">
-              We prioritise zones our lead physiotherapist can reach quickly. Other areas are available on request — confirm timing on WhatsApp.
+              Fastest response in South and Central Bengaluru. Other parts of the city are available on request — confirm timing when you message us.
             </p>
-            <button
-              type="button"
-              onClick={() => openModal('book')}
-              className="mt-5 px-5 py-2.5 bg-teal-700 hover:bg-teal-800 text-white text-sm font-semibold rounded-xl cursor-pointer"
+            <a
+              href="https://wa.me/917373638970"
+              target="_blank"
+              rel="noreferrer"
+              className="mt-4 inline-flex items-center gap-2 text-[15px] font-semibold text-teal-800 hover:text-teal-900"
             >
-              Check availability — {DISPLAY_PHONE}
-            </button>
+              <Phone className="w-4 h-4" />
+              {DISPLAY_PHONE}
+            </a>
+            <div className="mt-4">
+              <button
+                type="button"
+                onClick={() => openModal('book')}
+                className="px-5 py-2.5 bg-teal-700 hover:bg-teal-800 text-white text-sm font-semibold rounded-xl cursor-pointer"
+              >
+                Book assessment
+              </button>
+            </div>
           </div>
 
           <div className="space-y-3">
@@ -38,7 +47,7 @@ export const ServiceAreasSection: React.FC = () => {
                 Fastest response
               </div>
               <div className="flex flex-wrap gap-2">
-                {priority.map((a) => (
+                {['South Bengaluru', 'Central Bengaluru'].map((a) => (
                   <span
                     key={a}
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-emerald-100 text-[13px] font-medium text-slate-800"
@@ -48,6 +57,9 @@ export const ServiceAreasSection: React.FC = () => {
                   </span>
                 ))}
               </div>
+              <p className="text-[12px] text-emerald-900/80 mt-3">
+                Includes areas such as Lalbagh, Malleshwaram, Majestic, Bannerghatta Road and nearby localities.
+              </p>
             </div>
             <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
               <div className="flex items-center gap-2 text-slate-800 font-semibold text-sm mb-2">
@@ -55,12 +67,9 @@ export const ServiceAreasSection: React.FC = () => {
                 Other Bengaluru areas
               </div>
               <p className="text-[13px] text-slate-600 leading-relaxed">
-                We try to accommodate city-wide requests. Response may be slower depending on schedule — message us with your area and preferred dates.
+                Available on request. Response time depends on schedule — share your area and preferred dates on WhatsApp.
               </p>
             </div>
-            <p className="text-[12px] text-slate-500 leading-relaxed px-1">
-              <strong className="text-slate-700">Referring doctors:</strong> WhatsApp patient name, phone, diagnosis/surgery date and area to {DISPLAY_PHONE}. We coordinate the home assessment and can update you after the first visit.
-            </p>
           </div>
         </div>
       </div>

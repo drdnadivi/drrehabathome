@@ -74,7 +74,7 @@ export const Footer: React.FC = () => {
               </div>
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-teal-400 shrink-0 mt-0.5" />
-                <span>Home visits · Bengaluru</span>
+                <span>Home visits · South & Central Bengaluru (fastest) · wider city on request</span>
               </div>
               <button
                 type="button"
