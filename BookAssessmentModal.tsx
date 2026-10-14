@@ -177,7 +177,17 @@ export const BookAssessmentModal: React.FC = () => {
                   <option value="Bell's Palsy & Facial Nerve Rehabilitation">Bell's Palsy & Facial Nerve Rehabilitation</option>
                   <option value="Fracture Fixation & ORIF Post-Op">Fracture Fixation & ORIF Post-Op</option>
                   <option value="Other PMR Condition (Triage Required)">Other PMR Condition (Triage Required)</option>
-                </select>
+                
+              <option>Sports Injury / Return to Play</option>
+              <option>Stroke / Neurological Rehab</option>
+              <option>Spine / Sciatica / Back Pain</option>
+              <option>Shoulder / Frozen Shoulder</option>
+              <option>Geriatric / Fall Prevention</option>
+              <option>Cardiac / Pulmonary Conditioning</option>
+              <option>Women's Health / Pelvic Floor</option>
+              <option>Pre-habilitation (Before Surgery)</option>
+              <option>Other / Not Sure</option>
+            </select>
               </div>
 
               <div>

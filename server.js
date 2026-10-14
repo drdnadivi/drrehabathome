@@ -11,6 +11,12 @@ const __dirname = path.dirname(__filename);
 function detectPathway(diagnosis) {
   const d = (diagnosis || '').toLowerCase();
   const paths = [
+    { id: 'sports', keys: ['sport','athlete','sprain','tendon','tennis','runner','ligament'],
+      measures: [
+        { key: 'vas', label: 'Pain VAS', unit: '0-10', decisionRule: 'Pain with activity.' },
+        { key: 'function', label: 'Sport function', unit: 'text', decisionRule: 'Key sport limitation.' }
+      ],
+      tools: ['Resistance bands','Balance pad','Goniometer','Ice pack'] },
     { id: 'knee', keys: ['knee','tkr','tka','acl','meniscus'],
       measures: [
         { key: 'vas', label: 'Pain VAS', unit: '0-10', decisionRule: 'Patient-reported pain; primary comfort outcome.' },

@@ -16,12 +16,28 @@ export const SpecialtiesSection: React.FC = () => {
       points: ['Clear Day 7 / 14 / 21 checkpoints', 'Gait weaning guidance', 'Wound and swelling awareness'],
     },
     {
+      id: 'sports',
+      name: 'Sports rehab',
+      headline: 'From injury to return-to-play — criteria based, not guesswork',
+      summary:
+        'Sprains, ligament injuries, tendinopathy and post-op sports orthopaedics with graded loading and clear progression rules under PMR oversight.',
+      points: ['Load management plans', 'Strength & proprioception', 'Return-to-sport readiness checks'],
+    },
+    {
       id: 'neuro',
       name: 'Stroke & neuro',
       headline: 'Structured recovery in the early plasticity window',
       summary:
         'Tone, positioning and functional practice are guided so compensations do not become permanent habits.',
       points: ['Stage-aware programming', 'Balance and transfer safety', 'Family coaching on positioning'],
+    },
+    {
+      id: 'spine',
+      name: 'Spine & pain',
+      headline: 'Movement confidence with medical red-flag awareness',
+      summary:
+        'Sciatica, disc-related pain and mechanical back/neck programmes matched to symptom response.',
+      points: ['Directional preference', 'Graded activity', 'Desk and sleep advice'],
     },
     {
       id: 'shoulder',
@@ -38,6 +54,22 @@ export const SpecialtiesSection: React.FC = () => {
       summary:
         'Balance, strength and home environment factors are addressed together under medical oversight.',
       points: ['Timed mobility goals', 'Dual-task balance work', 'Practical home safety focus'],
+    },
+    {
+      id: 'cardio',
+      name: 'Cardio & pulmonary',
+      headline: 'Safe reconditioning after illness or heart/lung limits',
+      summary:
+        'Home-phase activity after cardiac clearance, COPD support and post-COVID fatigue-aware programmes.',
+      points: ['Symptom-guided walking', 'Vitals awareness', 'Energy conservation'],
+    },
+    {
+      id: 'womens',
+      name: "Women's health",
+      headline: 'Antenatal, postnatal and pelvic floor support at home',
+      summary:
+        'Practical mobility and education programmes, with referral when specialised internal care is needed.',
+      points: ['Trimester-aware advice', 'Pelvic floor education', 'Return-to-activity pacing'],
     },
   ];
 

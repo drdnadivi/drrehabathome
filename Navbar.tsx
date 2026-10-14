@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useApp } from './AppContext';
+import { DISPLAY_PHONE } from './config';
 import { Stethoscope, Calendar, LogIn, Menu, X, Award, User, ChevronDown } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
@@ -76,6 +77,14 @@ export const Navbar: React.FC = () => {
               <Calendar className="w-3.5 h-3.5" />
               Book Assessment
             </button>
+            <a
+              href="https://wa.me/917373638970"
+              target="_blank"
+              rel="noreferrer"
+              className="hidden md:inline text-[12px] font-medium text-slate-600 hover:text-teal-700 px-2"
+            >
+              {DISPLAY_PHONE}
+            </a>
 
             {currentUser ? (
               <div className="relative">

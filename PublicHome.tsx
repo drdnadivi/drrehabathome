@@ -2,6 +2,7 @@ import React from 'react';
 import { HeroSection } from './HeroSection';
 import { UspPmrSection } from './UspPmrSection';
 import { WorkflowSection } from './WorkflowSection';
+import { ServiceAreasSection } from './ServiceAreasSection';
 import { ConditionsTreatedSection } from './ConditionsTreatedSection';
 import { SpecialtiesSection } from './SpecialtiesSection';
 import { DynamicBlogsSection } from './DynamicBlogsSection';
@@ -17,6 +18,7 @@ export const PublicHome: React.FC = () => {
     <div className="space-y-0">
       <HeroSection />
       <WorkflowSection />
+      <ServiceAreasSection />
       <UspPmrSection />
       <ConditionsTreatedSection />
       <SpecialtiesSection />

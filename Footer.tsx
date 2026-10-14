@@ -1,5 +1,6 @@
 import React from 'react';
 import { useApp } from './AppContext';
+import { DISPLAY_PHONE, CARE_EMAIL, getWhatsAppBookUrl, getMailHref } from './config';
 import { Stethoscope, ShieldCheck, Phone, Mail, MapPin } from 'lucide-react';
 
 export const Footer: React.FC = () => {
@@ -63,24 +64,24 @@ export const Footer: React.FC = () => {
               <div className="flex items-start gap-2">
                 <Phone className="w-4 h-4 text-teal-400 shrink-0 mt-0.5" />
                 <div>
-                  <div className="text-white font-medium">WhatsApp booking</div>
-                  <div className="text-[11px] text-slate-500">Use Book Assessment on the site</div>
+                  <div className="text-white font-medium">Phone / WhatsApp</div>
+                  <a href="https://wa.me/917373638970" className="text-teal-300 hover:text-teal-200" target="_blank" rel="noreferrer">+91 73736 38970</a>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-teal-400 shrink-0" />
-                <span>care@drrehabathome.in</span>
+                <a href="mailto:n.adharshan@gmail.com" className="hover:text-teal-300">n.adharshan@gmail.com</a>
               </div>
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-teal-400 shrink-0 mt-0.5" />
-                <span>Bengaluru</span>
+                <span>Home visits · Bengaluru</span>
               </div>
               <button
                 type="button"
                 onClick={() => openModal('book')}
                 className="mt-1 w-full py-2.5 bg-teal-700 hover:bg-teal-600 text-white rounded-xl font-semibold text-[13px] transition cursor-pointer"
               >
-                Book on WhatsApp
+                Book assessment
               </button>
             </div>
           </div>
