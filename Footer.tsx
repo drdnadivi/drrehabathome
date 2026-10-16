@@ -14,7 +14,7 @@ export const Footer: React.FC = () => {
           <div>
             <BrandLogo variant="dark" />
             <p className="text-[13px] text-slate-400 leading-relaxed mb-4">
-              Home rehabilitation in Bengaluru. Physiotherapy and, as available, occupational therapy and speech therapy. Where applicable, clinical oversight may involve a PMR physician (Dr. Dharshan N A, MD (PMR), KMC 180734). Individual plans require assessment; outcomes vary.
+              
             </p>
             <div className="inline-flex items-center gap-2 text-[12px] text-teal-300 font-medium bg-slate-800/80 px-3 py-2 rounded-lg border border-slate-700">
               <ShieldCheck className="w-4 h-4 shrink-0" />
@@ -65,7 +65,7 @@ export const Footer: React.FC = () => {
               </div>
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-teal-400 shrink-0 mt-0.5" />
-                <span>Home visits · South & Central Bengaluru (fastest) · wider city on request</span>
+                <span>Home visits in Bengaluru</span>
               </div>
               <button
                 type="button"

@@ -33,10 +33,10 @@ export const PublicHome: React.FC = () => {
             PMR doctor-directed home rehab
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
-            Home rehabilitation in Bengaluru
+            Enquire about a guided weekly programme
           </h2>
           <p className="text-[15px] text-slate-600 leading-relaxed">
-            Home rehabilitation in Bengaluru. Physiotherapy and, as available, occupational therapy and speech therapy. Where applicable, clinical oversight may involve a PMR physician (Dr. Dharshan N A, MD (PMR), KMC 180734). Individual plans require assessment; outcomes vary. Contact us for information about services, areas covered, and fees.
+            Hospital-style rehab protocols at home, reassessed weekly, with PMR physician input where applicable. Contact us for information about services, areas covered, and fees.
           </p>
           <button
             type="button"

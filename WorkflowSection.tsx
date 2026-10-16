@@ -46,7 +46,7 @@ export const WorkflowSection: React.FC = () => {
             A clear clinical loop from assessment to recovery
           </h2>
           <p className="text-[15px] text-slate-600 mt-3 leading-relaxed">
-            Home rehabilitation in Bengaluru. Physiotherapy and, as available, occupational therapy and speech therapy. Where applicable, clinical oversight may involve a PMR physician (Dr. Dharshan N A, MD (PMR), KMC 180734). Individual plans require assessment; outcomes vary.
+            Home rehabilitation in Bengaluru. Physiotherapy and, as available, occupational therapy and speech therapy. Where applicable, clinical oversight may involve a PMR physician. Individual plans require assessment; outcomes vary.
           </p>
         </div>
 

@@ -153,17 +153,17 @@ export const HeroSection: React.FC = () => {
             {/* Small badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-teal-50 border border-teal-100 text-teal-800 text-xs font-semibold tracking-wide">
               <Stethoscope className="w-3.5 h-3.5 text-teal-600" />
-              Home rehabilitation · Bengaluru
+              Guided home rehab · Bengaluru
             </div>
 
             {/* Headline */}
             <div className="space-y-4">
               <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.18]">
-                Rehabilitation at home in{' '}
-                <span className="text-teal-700">Bengaluru</span>
+                Guided rehab protocols at home,{' '}
+                <span className="text-teal-700">reviewed every week</span>
               </h1>
               <p className="text-[15px] text-slate-600 leading-relaxed max-w-lg">
-                Home rehabilitation in Bengaluru. Physiotherapy and, as available, occupational therapy and speech therapy. Where applicable, clinical oversight may involve a PMR physician (Dr. Dharshan N A, MD (PMR), KMC 180734). Individual plans require assessment; outcomes vary.
+                Structured rehabilitation at home in Bengaluru — not a one-time exercise sheet. Your programme follows stepwise rehab protocols, with physiotherapy at the core and occupational or speech therapy when needed and available. Protocols are reassessed every week so intensity and goals match how you are progressing. Physician (PMR) input is built into that review cycle where applicable. Enquire to see how a programme can be set up after assessment. Results differ for each person.
               </p>
             </div>
 
@@ -172,7 +172,7 @@ export const HeroSection: React.FC = () => {
               <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-2">Practitioner information</p>
               <h3 className="text-[15px] font-bold text-slate-900">Dr. Dharshan N A</h3>
               <p className="text-xs font-medium text-teal-800 mt-0.5">MD (Physical Medicine &amp; Rehabilitation)</p>
-              <p className="text-[12px] text-slate-600 mt-1">Registration: KMC 180734</p>
+              <p className="text-[12px] text-slate-600 mt-1">Registration:</p>
               <p className="text-[12px] text-slate-500 mt-2 leading-snug">
                 Associated for clinical oversight of rehabilitation pathways. This listing is for patient information and is not a comparative ranking or guarantee of outcome.
               </p>
@@ -181,9 +181,9 @@ export const HeroSection: React.FC = () => {
             {/* Trust points */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {[
-                { icon: ShieldCheck, label: 'Structured pathways', sub: 'Condition-based programmes' },
-                { icon: Clock, label: 'Home visits', sub: 'South & Central priority' },
-                { icon: Activity, label: 'Clinical records', sub: 'Session logging for care team' },
+                { icon: ShieldCheck, label: 'Guided protocols', sub: 'Stepwise home programmes' },
+                { icon: Clock, label: 'Weekly review', sub: 'Plans updated to your progress' },
+                { icon: Activity, label: 'PMR in the cycle', sub: 'Physician input where applicable' },
               ].map((item) => (
                 <div key={item.label} className="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50/80 border border-slate-100">
                   <item.icon className="w-4.5 h-4.5 text-teal-600 mt-0.5 shrink-0" />

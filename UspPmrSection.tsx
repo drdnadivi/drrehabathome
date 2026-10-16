@@ -63,7 +63,8 @@ export const UspPmrSection: React.FC = () => {
           <p className="text-[12px] font-semibold uppercase tracking-wider text-slate-500 mb-2">Practitioner information</p>
           <p className="text-[15px] font-bold text-slate-900">Dr. Dharshan N A</p>
           <p className="text-[13px] text-teal-800 mt-0.5">MD (Physical Medicine &amp; Rehabilitation)</p>
-          <p className="text-[13px] text-slate-600 mt-1">KMC 180734</p>
+          <p className="text-[12px] text-slate-500 mt-1">Registration details: see website footer</p>
+          
           <ul className="mt-4 space-y-2">
             {[
               'Directory listing for patient information',
