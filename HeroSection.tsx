@@ -153,50 +153,39 @@ export const HeroSection: React.FC = () => {
             {/* Small badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-teal-50 border border-teal-100 text-teal-800 text-xs font-semibold tracking-wide">
               <Stethoscope className="w-3.5 h-3.5 text-teal-600" />
-              PMR Doctor-Directed Home Rehabilitation
+              Home physiotherapy · Bengaluru
             </div>
 
             {/* Headline */}
             <div className="space-y-4">
               <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.18]">
-                Hospital-grade recovery at home,{' '}
-                <span className="text-teal-700">directed by a Physiatrist.</span>
+                Physiotherapy at home in{' '}
+                <span className="text-teal-700">Bengaluru</span>
               </h1>
               <p className="text-[15px] text-slate-600 leading-relaxed max-w-lg">
-                Most home physiotherapy is delivered without specialist medical oversight. 
-                At DrRehab at Home, every plan is directed and audited by a 
-                <strong className="text-slate-800"> Physical Medicine & Rehabilitation (PMR) physician</strong> — 
-                so milestones are met and complications are caught early.
+                DrRehab@Home provides information and coordination for home-based physiotherapy services.
+                Clinical plans, where offered, are individualised after assessment. Outcomes vary by condition and patient factors.
+                A consulting Physical Medicine &amp; Rehabilitation (PMR) physician is associated for clinical oversight where applicable.
               </p>
             </div>
 
-            {/* Founder card */}
-            <div className="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-150 shadow-sm shadow-slate-200/50">
-              <div className="w-16 h-16 rounded-xl overflow-hidden border-2 border-teal-100 shrink-0 shadow-sm">
-                <img
-                  src="/dr-dharshan.jpg"
-                  alt="Dr. Dharshan N A, MD (PMR)"
-                  className="w-full h-full object-cover object-top"
-                />
-              </div>
-              <div className="min-w-0">
-                <div className="flex items-center gap-1.5">
-                  <h3 className="text-[15px] font-bold text-slate-900">Dr. Dharshan N A, MD (PMR)</h3>
-                  <Award className="w-4 h-4 text-teal-600 shrink-0" />
-                </div>
-                <p className="text-xs font-medium text-teal-700 mt-0.5">Founder & Lead Physiatrist</p>
-                <p className="text-[12.5px] text-slate-500 mt-1.5 leading-snug">
-                  Directs clinical evaluation, milestone audits (Day 7 · 14 · 21), and escalation decisions for every patient on the platform.
-                </p>
-              </div>
+            {/* Practitioner directory (factual) */}
+            <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm">
+              <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-2">Practitioner information</p>
+              <h3 className="text-[15px] font-bold text-slate-900">Dr. Dharshan N A</h3>
+              <p className="text-xs font-medium text-teal-800 mt-0.5">MD (Physical Medicine &amp; Rehabilitation)</p>
+              <p className="text-[12px] text-slate-600 mt-1">Registration: KMC 180734</p>
+              <p className="text-[12px] text-slate-500 mt-2 leading-snug">
+                Associated for clinical oversight of rehabilitation pathways. This listing is for patient information and is not a comparative ranking or guarantee of outcome.
+              </p>
             </div>
 
             {/* Trust points */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {[
-                { icon: ShieldCheck, label: '100% Milestone Audits', sub: 'Every critical day reviewed' },
-                { icon: Clock, label: '< 4 Hour Alerts', sub: 'Clinical escalation SLA' },
-                { icon: Activity, label: 'PMR Oversight', sub: 'Not just physiotherapy' },
+                { icon: ShieldCheck, label: 'Structured pathways', sub: 'Condition-based programmes' },
+                { icon: Clock, label: 'Home visits', sub: 'South & Central priority' },
+                { icon: Activity, label: 'Clinical records', sub: 'Session logging for care team' },
               ].map((item) => (
                 <div key={item.label} className="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50/80 border border-slate-100">
                   <item.icon className="w-4.5 h-4.5 text-teal-600 mt-0.5 shrink-0" />
@@ -215,7 +204,7 @@ export const HeroSection: React.FC = () => {
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-teal-700 hover:bg-teal-800 text-white text-[14px] font-semibold rounded-xl shadow-md shadow-teal-700/20 transition-all active:scale-[0.98] cursor-pointer"
               >
                 <Calendar className="w-4 h-4" />
-                Book Home Assessment
+                Contact / Enquiry
               </button>
               <a
                 href="#how-it-works"

@@ -127,7 +127,7 @@ export const CostCalculatorSection: React.FC = () => {
               className="w-full py-3.5 bg-teal-700 hover:bg-teal-800 text-white font-semibold text-[14px] rounded-xl flex items-center justify-center gap-2 cursor-pointer"
             >
               <Calendar className="w-4 h-4" />
-              Book assessment to confirm package
+              Contact us to discuss fees and schedule
             </button>
           </div>
         </div>

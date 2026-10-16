@@ -75,7 +75,7 @@ export const BookAssessmentModal: React.FC = () => {
               <Stethoscope className="w-4 h-4" />
             </span>
             <span className="text-[11px] font-bold uppercase tracking-wider text-teal-300">
-              DrRehabAtHome.in — PMR Doctor-Led Home Care
+              DrRehab@Home — Service enquiry
             </span>
           </div>
           <h2 className="text-xl font-bold">Schedule Home Physiotherapy Assessment</h2>

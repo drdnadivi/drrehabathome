@@ -703,7 +703,7 @@ export const ConditionsTreatedSection: React.FC = () => {
             className="inline-flex items-center gap-2 px-5 py-3 bg-teal-700 hover:bg-teal-800 text-white text-[14px] font-semibold rounded-xl cursor-pointer"
           >
             <Calendar className="w-4 h-4" />
-            Book assessment for your condition
+            Enquire about this pathway
           </button>
         </div>
       </div>
@@ -783,7 +783,7 @@ export const ConditionsTreatedSection: React.FC = () => {
               }}
               className="w-full py-3 bg-teal-700 hover:bg-teal-800 text-white font-semibold text-[14px] rounded-xl cursor-pointer"
             >
-              Book assessment
+              Contact / Enquiry
             </button>
           </div>
         </div>

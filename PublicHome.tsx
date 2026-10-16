@@ -33,10 +33,10 @@ export const PublicHome: React.FC = () => {
             PMR doctor-directed home rehab
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
-            Ready to start a structured recovery plan?
+            Need information about home physiotherapy?
           </h2>
           <p className="text-[15px] text-slate-600 leading-relaxed">
-            Book a home assessment. Dr. Dharshan and the care team will map the right pathway for your condition.
+            Contact us for factual information about services, areas covered, and fees. A clinical assessment is required before any care plan.
           </p>
           <button
             type="button"

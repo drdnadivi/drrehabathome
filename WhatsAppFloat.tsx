@@ -8,7 +8,7 @@ export const WhatsAppFloat: React.FC = () => {
       href={getWhatsAppBookUrl()}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`Chat on WhatsApp ${DISPLAY_PHONE}`}
+      aria-label={`WhatsApp enquiry ${DISPLAY_PHONE}`}
       title={`WhatsApp ${DISPLAY_PHONE}`}
       className="fixed bottom-5 right-5 z-[60] flex items-center gap-2 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white shadow-lg shadow-emerald-900/20 pl-3.5 pr-4 py-3 transition-transform hover:scale-105 active:scale-95"
     >

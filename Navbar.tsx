@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useApp } from './AppContext';
 import { DISPLAY_PHONE } from './config';
-import { Stethoscope, Calendar, LogIn, Menu, X, Award, User, ChevronDown } from 'lucide-react';
+import { Calendar, LogIn, Menu, X, User, ChevronDown } from 'lucide-react';
+import { BrandLogo } from './BrandLogo';
 
 export const Navbar: React.FC = () => {
   const { currentRole, currentUser, switchRole, openModal, logout } = useApp();
@@ -36,24 +37,7 @@ export const Navbar: React.FC = () => {
         <div className="flex items-center justify-between h-[4.25rem]">
           
           {/* Logo */}
-          <div 
-            className="flex items-center gap-3 cursor-pointer group" 
-            onClick={() => switchRole('public')}
-          >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-700 to-teal-500 flex items-center justify-center text-white shadow-sm shadow-teal-600/20 group-hover:shadow-md transition-shadow">
-              <Stethoscope className="w-5 h-5" />
-            </div>
-            <div className="leading-tight">
-              <div className="flex items-center gap-2">
-                <span className="text-[1.05rem] font-bold tracking-tight text-slate-900">
-                  DrRehab<span className="text-teal-600">AtHome</span>
-                </span>
-              </div>
-              <p className="text-[10px] font-medium text-slate-500 tracking-wide">
-                Founded by Dr. Dharshan N A, MD (PMR)
-              </p>
-            </div>
-          </div>
+          <BrandLogo onClick={() => switchRole('public')} />
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-1">
@@ -75,7 +59,7 @@ export const Navbar: React.FC = () => {
               className="px-4 py-2.5 bg-teal-700 hover:bg-teal-800 text-white text-[13px] font-semibold rounded-xl shadow-sm shadow-teal-700/15 transition-all flex items-center gap-2 cursor-pointer active:scale-[0.98]"
             >
               <Calendar className="w-3.5 h-3.5" />
-              Book Assessment
+              Contact / Enquiry
             </button>
             <a
               href="https://wa.me/917373638970"

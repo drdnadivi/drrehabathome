@@ -50,14 +50,14 @@ export const ClinicalReportModal: React.FC = () => {
                   <Stethoscope className="w-5 h-5" />
                 </span>
                 <span className="text-lg font-black tracking-tight text-slate-900">
-                  DrRehab<span className="text-teal-600">AtHome.in</span>
+                  DrRehab<span className="text-teal-600">@</span>Home
                 </span>
               </div>
               <div className="text-[11px] text-slate-500 mt-1">
                 Department of Physical Medicine & Rehabilitation (PM&R)
               </div>
               <div className="text-[10px] text-slate-400">
-                DrRehab Central Clinical Audit Board | ISO-9001 Health Standards
+                Clinical session record · For care team use
               </div>
             </div>
 
@@ -169,7 +169,7 @@ export const ClinicalReportModal: React.FC = () => {
               <div className="text-right">
                 <div className="text-xs font-bold text-teal-900 font-serif italic">Dr. Dharshan N A, MD (PMR)</div>
                 <div className="text-[10px] font-semibold text-slate-700">Dr. Dharshan N A, MD (PMR)</div>
-                <div className="text-[9px] text-slate-400">Lead Physiatrist • DrRehabAtHome.in</div>
+                <div className="text-[9px] text-slate-400">Lead Physiatrist • DrRehab@Home</div>
               </div>
             </div>
           </div>

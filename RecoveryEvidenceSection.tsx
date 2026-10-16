@@ -68,6 +68,9 @@ export const RecoveryEvidenceSection: React.FC = () => {
           ))}
         </div>
       </div>
+    <p className="text-center text-[12px] text-slate-500 max-w-2xl mx-auto mt-6 px-4">
+          Educational information only. Timelines and milestones are general references, not guarantees. Individual outcomes vary; clinical assessment is required.
+        </p>
     </section>
   );
 };

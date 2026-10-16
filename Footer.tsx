@@ -1,7 +1,8 @@
 import React from 'react';
 import { useApp } from './AppContext';
-import { DISPLAY_PHONE, CARE_EMAIL, getWhatsAppBookUrl, getMailHref } from './config';
-import { Stethoscope, ShieldCheck, Phone, Mail, MapPin } from 'lucide-react';
+import { DISPLAY_PHONE, CARE_EMAIL, RMP_NAME, RMP_QUALIFICATION, RMP_REGISTRATION } from './config';
+import { ShieldCheck, Phone, Mail, MapPin } from 'lucide-react';
+import { BrandLogo } from './BrandLogo';
 
 export const Footer: React.FC = () => {
   const { openModal } = useApp();
@@ -11,19 +12,9 @@ export const Footer: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
           <div>
-            <div className="flex items-center gap-2.5 mb-3">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-teal-600 to-teal-500 flex items-center justify-center text-white">
-                <Stethoscope className="w-4 h-4" />
-              </div>
-              <div>
-                <div className="text-[15px] font-bold text-white tracking-tight">
-                  DrRehab<span className="text-teal-400">AtHome</span>
-                </div>
-                <div className="text-[10px] text-slate-500">Founded by Dr. Dharshan N A, MD (PMR)</div>
-              </div>
-            </div>
+            <BrandLogo variant="dark" />
             <p className="text-[13px] text-slate-400 leading-relaxed mb-4">
-              PMR doctor-directed home rehabilitation in Bengaluru — assessment booking on WhatsApp.
+              Factual information on home physiotherapy services in Bengaluru. Contact via phone, email or WhatsApp for enquiries.
             </p>
             <div className="inline-flex items-center gap-2 text-[12px] text-teal-300 font-medium bg-slate-800/80 px-3 py-2 rounded-lg border border-slate-700">
               <ShieldCheck className="w-4 h-4 shrink-0" />
@@ -36,7 +27,7 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2 text-[13px] text-slate-400">
               <li><a href="#conditions-treated" className="hover:text-teal-300 transition">Conditions</a></li>
               <li><a href="#how-it-works" className="hover:text-teal-300 transition">How it works</a></li>
-              <li><a href="#pmr-advantage" className="hover:text-teal-300 transition">PMR advantage</a></li>
+              <li><a href="#pmr-advantage" className="hover:text-teal-300 transition">About pathways</a></li>
               <li><a href="#pricing" className="hover:text-teal-300 transition">Pricing</a></li>
               <li><a href="#dynamic-blogs" className="hover:text-teal-300 transition">Insights</a></li>
             </ul>
@@ -81,14 +72,20 @@ export const Footer: React.FC = () => {
                 onClick={() => openModal('book')}
                 className="mt-1 w-full py-2.5 bg-teal-700 hover:bg-teal-600 text-white rounded-xl font-semibold text-[13px] transition cursor-pointer"
               >
-                Book assessment
+                Contact / Enquiry
               </button>
             </div>
           </div>
         </div>
 
         <div className="pt-6 border-t border-slate-800 text-[12px] text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div>© {new Date().getFullYear()} DrRehab at Home. Founded by Dr. Dharshan N A, MD (PMR).</div>
+          <div className="text-[11px] text-slate-500 leading-relaxed max-w-3xl">
+            <p className="font-medium text-slate-400 mb-1">Practitioner information (for patient reference)</p>
+            <p>{RMP_NAME}, {RMP_QUALIFICATION}</p>
+            <p>Registration: {RMP_REGISTRATION}</p>
+            <p className="mt-2 text-slate-500">Information on this website is general and factual. Individual care plans require clinical assessment. Outcomes vary. This site does not guarantee results or claim superiority over other practitioners or facilities.</p>
+          </div>
+          <div>© {new Date().getFullYear()} DrRehab@Home. Home physiotherapy information service · Bengaluru.</div>
           <div>Clinical information · Not a substitute for emergency care</div>
         </div>
       </div>

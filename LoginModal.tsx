@@ -99,7 +99,7 @@ export const LoginModal: React.FC = () => {
 
           <p className="text-[11px] text-slate-400 text-center leading-relaxed">
             Portal accounts are issued by the clinic. Patients see progress after they are enrolled.
-            Public booking is on WhatsApp — use Book Assessment on the website.
+            For service information, use Contact / Enquiry or WhatsApp on the website.
           </p>
         </form>
       </div>

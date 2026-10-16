@@ -213,7 +213,7 @@ export const DoctorReviewModal: React.FC = () => {
                     <FileCheck className="w-3.5 h-3.5 text-indigo-600" />
                     <span>Digitally Certified by: <strong>Dr. Dharshan N A, MD (PMR)</strong></span>
                   </div>
-                  <div className="text-[10px] text-slate-500">Chief Physiatrist • DrRehabAtHome.in</div>
+                  <div className="text-[10px] text-slate-500">Chief Physiatrist • DrRehab@Home</div>
                 </div>
               </div>
               <span className="text-[10px] text-indigo-700 font-semibold bg-white px-2 py-1 rounded-md border border-indigo-100 shadow-xs">MCI Reg: MCI-PMR-84920</span>

@@ -35,7 +35,7 @@ export const ServiceAreasSection: React.FC = () => {
                 onClick={() => openModal('book')}
                 className="px-5 py-2.5 bg-teal-700 hover:bg-teal-800 text-white text-sm font-semibold rounded-xl cursor-pointer"
               >
-                Book assessment
+                Contact / Enquiry
               </button>
             </div>
           </div>

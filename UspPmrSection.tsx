@@ -105,7 +105,7 @@ export const UspPmrSection: React.FC = () => {
           <div className="px-4 sm:px-6 py-5 border-b border-slate-100 bg-slate-50/60">
             <div className="flex justify-between text-[12px] font-semibold mb-2">
               <span className={slider < 50 ? 'text-rose-600' : 'text-slate-400'}>Ordinary home PT</span>
-              <span className={slider >= 50 ? 'text-teal-700' : 'text-slate-400'}>DrRehab + PMR direction</span>
+              <span className={slider >= 50 ? 'text-teal-700' : 'text-slate-400'}>Structured home programme</span>
             </div>
             <input
               type="range"
@@ -131,7 +131,7 @@ export const UspPmrSection: React.FC = () => {
                     <span className="inline-flex items-center gap-1"><XCircle className="w-3.5 h-3.5 text-rose-400" /> Ordinary home PT</span>
                   </th>
                   <th className={`px-4 sm:px-6 py-3 font-medium ${slider >= 50 ? 'bg-teal-50 text-teal-900' : ''}`}>
-                    <span className="inline-flex items-center gap-1"><CheckCircle2 className="w-3.5 h-3.5 text-teal-600" /> DrRehab at Home</span>
+                    <span className="inline-flex items-center gap-1"><CheckCircle2 className="w-3.5 h-3.5 text-teal-600" /> DrRehab@Home</span>
                   </th>
                 </tr>
               </thead>
@@ -156,7 +156,7 @@ export const UspPmrSection: React.FC = () => {
               onClick={() => openModal('book')}
               className="shrink-0 px-4 py-2.5 bg-teal-700 hover:bg-teal-800 text-white text-[13px] font-semibold rounded-xl cursor-pointer"
             >
-              Book assessment
+              Contact / Enquiry
             </button>
           </div>
         </div>
