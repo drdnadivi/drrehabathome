@@ -159,7 +159,7 @@ export const BlogReaderModal: React.FC = () => {
             <button
               onClick={() => {
                 closeModal();
-                const el = document.querySelector('#pmr-advantage');
+                const el = document.querySelector('#role-of-pmr');
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }}
               className="px-3 py-1.5 bg-teal-600 hover:bg-teal-500 text-white text-xs font-semibold rounded-lg shrink-0 cursor-pointer"

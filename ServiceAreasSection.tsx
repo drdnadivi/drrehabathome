@@ -18,7 +18,7 @@ export const ServiceAreasSection: React.FC = () => {
               Home visits across Bengaluru
             </h2>
             <p className="text-[15px] text-slate-600 mt-3 leading-relaxed">
-              Fastest response in South and Central Bengaluru. Other parts of the city are available on request — confirm timing when you message us.
+              Home rehabilitation visits with priority response in South and Central Bengaluru. Other areas on request. Physiotherapy; occupational therapy and speech therapy as available.
             </p>
             <a
               href="https://wa.me/917373638970"

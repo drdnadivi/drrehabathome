@@ -78,7 +78,7 @@ export const BookAssessmentModal: React.FC = () => {
               DrRehab@Home — Service enquiry
             </span>
           </div>
-          <h2 className="text-xl font-bold">Schedule Home Physiotherapy Assessment</h2>
+          <h2 className="text-xl font-bold">Service enquiry — home rehabilitation</h2>
           <p className="text-xs text-slate-300 mt-1">
             Every session outcome is evaluated by our Physical Medicine & Rehabilitation (PMR) doctors.
           </p>

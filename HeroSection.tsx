@@ -153,19 +153,17 @@ export const HeroSection: React.FC = () => {
             {/* Small badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-teal-50 border border-teal-100 text-teal-800 text-xs font-semibold tracking-wide">
               <Stethoscope className="w-3.5 h-3.5 text-teal-600" />
-              Home physiotherapy · Bengaluru
+              Home rehabilitation · Bengaluru
             </div>
 
             {/* Headline */}
             <div className="space-y-4">
               <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.18]">
-                Physiotherapy at home in{' '}
+                Rehabilitation at home in{' '}
                 <span className="text-teal-700">Bengaluru</span>
               </h1>
               <p className="text-[15px] text-slate-600 leading-relaxed max-w-lg">
-                DrRehab@Home provides information and coordination for home-based physiotherapy services.
-                Clinical plans, where offered, are individualised after assessment. Outcomes vary by condition and patient factors.
-                A consulting Physical Medicine &amp; Rehabilitation (PMR) physician is associated for clinical oversight where applicable.
+                Home rehabilitation in Bengaluru. Physiotherapy and, as available, occupational therapy and speech therapy. Where applicable, clinical oversight may involve a PMR physician (Dr. Dharshan N A, MD (PMR), KMC 180734). Individual plans require assessment; outcomes vary.
               </p>
             </div>
 

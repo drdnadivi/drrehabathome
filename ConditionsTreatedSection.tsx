@@ -632,7 +632,7 @@ export const ConditionsTreatedSection: React.FC = () => {
             Pathways, protocols and equipment we bring
           </h2>
           <p className="text-[15px] text-slate-600 mt-3 leading-relaxed">
-            Click any condition to see the home protocol, PMR oversight points, and the portable equipment typically brought to visits.
+            Click any condition for general pathway information. Home rehabilitation may include physiotherapy and, as available, occupational or speech therapy. Plans are individualised after assessment; outcomes vary.
           </p>
         </div>
 

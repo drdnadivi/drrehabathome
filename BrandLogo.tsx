@@ -46,7 +46,7 @@ export const BrandLogo: React.FC<Props> = ({
         </div>
         {showTagline && (
           <p className={`text-[10px] font-medium ${tagColor} tracking-wide`}>
-            Home physiotherapy · Bengaluru
+            Home rehabilitation · Bengaluru
           </p>
         )}
       </div>

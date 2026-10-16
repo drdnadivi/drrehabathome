@@ -86,7 +86,7 @@ export const SpecialtiesSection: React.FC = () => {
             Clinical pathways directed by a Physiatrist
           </h2>
           <p className="text-[15px] text-slate-600 mt-3">
-            Each pathway is supervised by Dr. Dharshan N A, MD (PMR), with room for additional PMR colleagues as the network grows.
+            Pathways may involve physiotherapy and, as available, occupational therapy or speech therapy. Clinical oversight may include a PMR physician (KMC 180734) where applicable. Outcomes vary.
           </p>
         </div>
 

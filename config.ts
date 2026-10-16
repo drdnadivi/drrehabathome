@@ -11,7 +11,7 @@ export const RMP_REGISTRATION = 'KMC 180734';
 
 /** Neutral enquiry text — informational, not hard solicitation */
 export const WHATSAPP_BOOK_MESSAGE =
-  'Hello DrRehab@Home, I would like information about home physiotherapy services in Bengaluru (South / Central).';
+  'Hello DrRehab@Home, I would like information about home rehabilitation in Bengaluru (physiotherapy; OT/speech as available). PMR physician association where applicable (KMC 180734).';
 
 export function getWhatsAppBookUrl(extra?: string): string {
   const text = extra ? `${WHATSAPP_BOOK_MESSAGE} ${extra}` : WHATSAPP_BOOK_MESSAGE;

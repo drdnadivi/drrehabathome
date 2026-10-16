@@ -14,7 +14,7 @@ export const Footer: React.FC = () => {
           <div>
             <BrandLogo variant="dark" />
             <p className="text-[13px] text-slate-400 leading-relaxed mb-4">
-              Factual information on home physiotherapy services in Bengaluru. Contact via phone, email or WhatsApp for enquiries.
+              Home rehabilitation in Bengaluru. Physiotherapy and, as available, occupational therapy and speech therapy. Where applicable, clinical oversight may involve a PMR physician (Dr. Dharshan N A, MD (PMR), KMC 180734). Individual plans require assessment; outcomes vary.
             </p>
             <div className="inline-flex items-center gap-2 text-[12px] text-teal-300 font-medium bg-slate-800/80 px-3 py-2 rounded-lg border border-slate-700">
               <ShieldCheck className="w-4 h-4 shrink-0" />
@@ -27,7 +27,7 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2 text-[13px] text-slate-400">
               <li><a href="#conditions-treated" className="hover:text-teal-300 transition">Conditions</a></li>
               <li><a href="#how-it-works" className="hover:text-teal-300 transition">How it works</a></li>
-              <li><a href="#pmr-advantage" className="hover:text-teal-300 transition">About pathways</a></li>
+              <li><a href="#role-of-pmr" className="hover:text-teal-300 transition">Role of PMR</a></li>
               <li><a href="#pricing" className="hover:text-teal-300 transition">Pricing</a></li>
               <li><a href="#dynamic-blogs" className="hover:text-teal-300 transition">Insights</a></li>
             </ul>
@@ -85,7 +85,7 @@ export const Footer: React.FC = () => {
             <p>Registration: {RMP_REGISTRATION}</p>
             <p className="mt-2 text-slate-500">Information on this website is general and factual. Individual care plans require clinical assessment. Outcomes vary. This site does not guarantee results or claim superiority over other practitioners or facilities.</p>
           </div>
-          <div>© {new Date().getFullYear()} DrRehab@Home. Home physiotherapy information service · Bengaluru.</div>
+          <div>© {new Date().getFullYear()} DrRehab@Home. Home rehabilitation information · Bengaluru.</div>
           <div>Clinical information · Not a substitute for emergency care</div>
         </div>
       </div>

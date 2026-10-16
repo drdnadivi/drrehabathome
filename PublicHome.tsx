@@ -33,10 +33,10 @@ export const PublicHome: React.FC = () => {
             PMR doctor-directed home rehab
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
-            Need information about home physiotherapy?
+            Home rehabilitation in Bengaluru
           </h2>
           <p className="text-[15px] text-slate-600 leading-relaxed">
-            Contact us for factual information about services, areas covered, and fees. A clinical assessment is required before any care plan.
+            Home rehabilitation in Bengaluru. Physiotherapy and, as available, occupational therapy and speech therapy. Where applicable, clinical oversight may involve a PMR physician (Dr. Dharshan N A, MD (PMR), KMC 180734). Individual plans require assessment; outcomes vary. Contact us for information about services, areas covered, and fees.
           </p>
           <button
             type="button"
@@ -44,7 +44,7 @@ export const PublicHome: React.FC = () => {
             className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-teal-700 hover:bg-teal-800 text-white text-[14px] font-semibold rounded-xl shadow-sm cursor-pointer"
           >
             <Calendar className="w-4 h-4" />
-            Book home assessment
+            Contact / Enquiry
           </button>
         </div>
       </section>
