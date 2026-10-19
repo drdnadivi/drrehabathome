@@ -6,7 +6,7 @@ export const SERVICE_CITY = 'Bengaluru';
 
 /** RMP disclosure (NMC electronic media) — replace placeholder with real SMR/NMR number */
 export const RMP_NAME = 'Dr. Dharshan N A';
-export const RMP_QUALIFICATION = 'MD (Physical Medicine & Rehabilitation)';
+export const RMP_QUALIFICATION = 'MBBS, MD (Physical Medicine & Rehabilitation)';
 export const RMP_FELLOWSHIPS = [
   'Fellowship in Interventional Pain Management',
   'Fellowship in Stem Cell and Regenerative Medicine',

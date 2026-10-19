@@ -43,16 +43,17 @@ export const AboutPmrSection: React.FC = () => {
                 />
               </div>
               <div className="min-w-0">
-                <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Physician</p>
+                <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Practitioner information</p>
                 <p className="text-[16px] font-bold text-slate-900 mt-0.5">Dr. Dharshan N A</p>
-                <p className="text-[13px] text-teal-800 font-medium mt-1">MD (Physical Medicine &amp; Rehabilitation)</p>
+                <p className="text-[13px] text-slate-600 mt-1">MBBS</p>
+                <p className="text-[13px] text-teal-800 font-medium mt-0.5">MD (Physical Medicine &amp; Rehabilitation)</p>
               </div>
             </div>
             <ul className="mt-4 space-y-2 text-[13px] text-slate-600">
               <li className="flex gap-2"><span className="text-teal-600 font-bold">·</span> Fellowship in Interventional Pain Management</li>
               <li className="flex gap-2"><span className="text-teal-600 font-bold">·</span> Fellowship in Stem Cell and Regenerative Medicine</li>
             </ul>
-            <p className="text-[11px] text-slate-400 mt-4">Registration details in the website footer.</p>
+            <p className="text-[11px] text-slate-400 mt-4">Associated for clinical oversight of rehabilitation pathways.</p>
           </div>
         </div>
 

@@ -82,8 +82,8 @@ export const Footer: React.FC = () => {
           <div className="text-[11px] text-slate-500 leading-relaxed max-w-3xl">
             <p className="font-medium text-slate-400 mb-1">Practitioner information (for patient reference)</p>
             <p>{RMP_NAME}, {RMP_QUALIFICATION}</p>
-            <p>Registration: {RMP_REGISTRATION}</p>
-            <p className="mt-2 text-slate-500">Information on this website is general and factual. Individual care plans require clinical assessment. Outcomes vary. This site does not guarantee results or claim superiority over other practitioners or facilities.</p>
+            <p>{RMP_REGISTRATION}</p>
+            <p className="mt-2 text-slate-500">Information on this website is general and factual. Individual care plans require clinical assessment. Outcomes vary. Associated for clinical oversight of rehabilitation pathways.</p>
           </div>
           <div>© {new Date().getFullYear()} DrRehab@Home. Home rehabilitation information · Bengaluru.</div>
           <div>Clinical information · Not a substitute for emergency care</div>

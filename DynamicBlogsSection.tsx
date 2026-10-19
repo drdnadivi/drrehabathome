@@ -29,9 +29,7 @@ export const DynamicBlogsSection: React.FC = () => {
               <BookOpen className="w-3.5 h-3.5" />
               Insights
             </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mt-3 tracking-tight">
-              Clinical notes & education
-            </h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">Clinical notes &amp; education</h2>
             <p className="text-[15px] text-slate-600 mt-2 max-w-xl">
               Articles for patients and referring clinicians. Content can be managed from the admin console.
             </p>

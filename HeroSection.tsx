@@ -171,10 +171,10 @@ export const HeroSection: React.FC = () => {
             <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm">
               <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-2">Practitioner information</p>
               <h3 className="text-[15px] font-bold text-slate-900">Dr. Dharshan N A</h3>
+              <p className="text-xs text-slate-600 mt-0.5">MBBS</p>
               <p className="text-xs font-medium text-teal-800 mt-0.5">MD (Physical Medicine &amp; Rehabilitation)</p>
-              <p className="text-[12px] text-slate-600 mt-1">Registration:</p>
               <p className="text-[12px] text-slate-500 mt-2 leading-snug">
-                Associated for clinical oversight of rehabilitation pathways. This listing is for patient information and is not a comparative ranking or guarantee of outcome.
+                Associated for clinical oversight of rehabilitation pathways.
               </p>
             </div>
 

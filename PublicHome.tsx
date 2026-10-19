@@ -8,6 +8,7 @@ import { ConditionsTreatedSection } from './ConditionsTreatedSection';
 import { UspPmrSection } from './UspPmrSection';
 import { ServiceAreasSection } from './ServiceAreasSection';
 import { DynamicBlogsSection } from './DynamicBlogsSection';
+import { CostCalculatorSection } from './CostCalculatorSection';
 import { useApp } from './AppContext';
 import { Calendar, ShieldCheck } from 'lucide-react';
 
@@ -24,6 +25,7 @@ export const PublicHome: React.FC = () => {
       <ConditionsTreatedSection />
       <UspPmrSection />
       <ServiceAreasSection />
+      <CostCalculatorSection />
       <DynamicBlogsSection />
 
       <section className="bg-slate-50 border-t border-slate-100 py-14 px-4 sm:px-6 lg:px-8">

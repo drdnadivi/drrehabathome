@@ -30,7 +30,7 @@ export const WhatIsPmrSection: React.FC = () => {
           </div>
           <div className="rounded-xl bg-white border border-slate-100 p-4">
             <div className="text-[12px] font-bold text-teal-800 uppercase tracking-wide">PMR / Physiatry</div>
-            <p className="text-[13px] text-slate-600 mt-1">Focus on function, disability &amp; recovery — not the same as a physiotherapy diploma alone</p>
+            <p className="text-[13px] text-slate-600 mt-1">Focus on function, disability &amp; recovery</p>
           </div>
         </div>
 
