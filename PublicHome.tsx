@@ -1,6 +1,7 @@
 import React from 'react';
 import { HeroSection } from './HeroSection';
 import { UspPmrSection } from './UspPmrSection';
+import { AboutPmrSection } from './AboutPmrSection';
 import { WorkflowSection } from './WorkflowSection';
 import { ServiceAreasSection } from './ServiceAreasSection';
 import { ConditionsTreatedSection } from './ConditionsTreatedSection';
@@ -17,6 +18,7 @@ export const PublicHome: React.FC = () => {
   return (
     <div className="space-y-0">
       <HeroSection />
+      <AboutPmrSection />
       <WorkflowSection />
       <ServiceAreasSection />
       <UspPmrSection />

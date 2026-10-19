@@ -27,7 +27,7 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2 text-[13px] text-slate-400">
               <li><a href="#conditions-treated" className="hover:text-teal-300 transition">Conditions</a></li>
               <li><a href="#how-it-works" className="hover:text-teal-300 transition">How it works</a></li>
-              <li><a href="#role-of-pmr" className="hover:text-teal-300 transition">Role of PMR</a></li>
+              <li><a href="#about" className="hover:text-teal-300 transition">Role of PMR</a></li>
               <li><a href="#pricing" className="hover:text-teal-300 transition">Pricing</a></li>
               <li><a href="#dynamic-blogs" className="hover:text-teal-300 transition">Insights</a></li>
             </ul>

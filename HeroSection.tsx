@@ -153,17 +153,17 @@ export const HeroSection: React.FC = () => {
             {/* Small badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-teal-50 border border-teal-100 text-teal-800 text-xs font-semibold tracking-wide">
               <Stethoscope className="w-3.5 h-3.5 text-teal-600" />
-              Guided home rehab · Bengaluru
+              PMR-informed home rehab · Bengaluru
             </div>
 
             {/* Headline */}
             <div className="space-y-4">
               <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.18]">
-                Guided rehab protocols at home,{' '}
-                <span className="text-teal-700">reviewed every week</span>
+                Stage-based rehab at home,{' '}
+                <span className="text-teal-700">not a one-page protocol</span>
               </h1>
               <p className="text-[15px] text-slate-600 leading-relaxed max-w-lg">
-                Structured rehabilitation at home in Bengaluru — not a one-time exercise sheet. Your programme follows stepwise rehab protocols, with physiotherapy at the core and occupational or speech therapy when needed and available. Protocols are reassessed every week so intensity and goals match how you are progressing. Physician (PMR) input is built into that review cycle where applicable. Enquire to see how a programme can be set up after assessment. Results differ for each person.
+                DrRehab@Home organises home rehabilitation the way PMR medicine thinks about recovery: by stage, risk, and function — not a single exercise sheet for every patient. Stroke care changes from flaccid to spastic phases; knee and shoulder plans shift week by week. Physiotherapy is core; occupational and speech therapy when needed and available. Protocols are reassessed every week. Physician (PMR) input sits in the review cycle where applicable. Enquire after you are ready for assessment. Results differ for each person.
               </p>
             </div>
 
@@ -181,9 +181,9 @@ export const HeroSection: React.FC = () => {
             {/* Trust points */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {[
-                { icon: ShieldCheck, label: 'Guided protocols', sub: 'Stepwise home programmes' },
-                { icon: Clock, label: 'Weekly review', sub: 'Plans updated to your progress' },
-                { icon: Activity, label: 'PMR in the cycle', sub: 'Physician input where applicable' },
+                { icon: ShieldCheck, label: 'Stage-based plans', sub: 'Matched to recovery phase' },
+                { icon: Clock, label: 'Weekly review', sub: 'Protocols updated as you change' },
+                { icon: Activity, label: 'PMR-informed', sub: 'Specialty lens on home care' },
               ].map((item) => (
                 <div key={item.label} className="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50/80 border border-slate-100">
                   <item.icon className="w-4.5 h-4.5 text-teal-600 mt-0.5 shrink-0" />

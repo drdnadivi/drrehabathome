@@ -12,7 +12,8 @@ export const Navbar: React.FC = () => {
   const navLinks = [
     { label: 'How It Works', href: '#how-it-works' },
     { label: 'Conditions', href: '#conditions-treated' },
-    { label: 'Role of PMR', href: '#role-of-pmr' },
+    { label: 'About', href: '#about' },
+    { label: 'Stage-based rehab', href: '#role-of-pmr' },
     { label: 'Pricing', href: '#pricing' },
     { label: 'Insights', href: '#dynamic-blogs' },
   ];

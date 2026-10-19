@@ -86,7 +86,7 @@ export const SpecialtiesSection: React.FC = () => {
             Clinical pathways directed by a Physiatrist
           </h2>
           <p className="text-[15px] text-slate-600 mt-3">
-            Pathways may involve physiotherapy and, as available, occupational therapy or speech therapy. Clinical oversight may include a PMR physician where applicable. Outcomes vary.
+            These are clinical pathway themes — not one-size home sheets. Staging, precautions, and weekly review shape the actual programme. Outcomes vary.
           </p>
         </div>
 
