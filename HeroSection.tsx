@@ -153,17 +153,17 @@ export const HeroSection: React.FC = () => {
             {/* Small badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-teal-50 border border-teal-100 text-teal-800 text-xs font-semibold tracking-wide">
               <Stethoscope className="w-3.5 h-3.5 text-teal-600" />
-              PMR-informed home rehab · Bengaluru
+              Stage-based home rehab · Bengaluru
             </div>
 
             {/* Headline */}
             <div className="space-y-4">
               <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.18]">
-                Stage-based rehab at home,{' '}
+                Stage-based rehab at home —{' '}
                 <span className="text-teal-700">not a one-page protocol</span>
               </h1>
               <p className="text-[15px] text-slate-600 leading-relaxed max-w-lg">
-                DrRehab@Home organises home rehabilitation the way PMR medicine thinks about recovery: by stage, risk, and function — not a single exercise sheet for every patient. Stroke care changes from flaccid to spastic phases; knee and shoulder plans shift week by week. Physiotherapy is core; occupational and speech therapy when needed and available. Protocols are reassessed every week. Physician (PMR) input sits in the review cycle where applicable. Enquire after you are ready for assessment. Results differ for each person.
+                You don't get one fixed exercise sheet for the whole journey. Your home programme is matched to the phase you are in and updated as you improve. Weekly review keeps goals and exercises aligned. Ask us how a plan could look after assessment.
               </p>
             </div>
 
@@ -181,9 +181,9 @@ export const HeroSection: React.FC = () => {
             {/* Trust points */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {[
-                { icon: ShieldCheck, label: 'Stage-based plans', sub: 'Matched to recovery phase' },
-                { icon: Clock, label: 'Weekly review', sub: 'Protocols updated as you change' },
-                { icon: Activity, label: 'PMR-informed', sub: 'Specialty lens on home care' },
+                { icon: ShieldCheck, label: 'Stage matched', sub: 'Plan fits the phase' },
+                { icon: Clock, label: 'Weekly review', sub: 'Goals stay aligned' },
+                { icon: Activity, label: 'Home programme', sub: 'Updated as you improve' },
               ].map((item) => (
                 <div key={item.label} className="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50/80 border border-slate-100">
                   <item.icon className="w-4.5 h-4.5 text-teal-600 mt-0.5 shrink-0" />

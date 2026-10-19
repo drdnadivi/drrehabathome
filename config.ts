@@ -7,11 +7,15 @@ export const SERVICE_CITY = 'Bengaluru';
 /** RMP disclosure (NMC electronic media) — replace placeholder with real SMR/NMR number */
 export const RMP_NAME = 'Dr. Dharshan N A';
 export const RMP_QUALIFICATION = 'MD (Physical Medicine & Rehabilitation)';
+export const RMP_FELLOWSHIPS = [
+  'Fellowship in Interventional Pain Management',
+  'Fellowship in Stem Cell and Regenerative Medicine',
+];
 export const RMP_REGISTRATION = 'KMC 180734';
 
 /** Neutral enquiry text — informational, not hard solicitation */
 export const WHATSAPP_BOOK_MESSAGE =
-  'Hello DrRehab@Home, I would like to enquire about stage-based home rehabilitation (PMR-informed protocols with weekly review) in Bengaluru.';
+  'Hello DrRehab@Home, I would like to enquire about stage-based home rehabilitation with weekly review in Bengaluru.';
 
 export function getWhatsAppBookUrl(extra?: string): string {
   const text = extra ? `${WHATSAPP_BOOK_MESSAGE} ${extra}` : WHATSAPP_BOOK_MESSAGE;

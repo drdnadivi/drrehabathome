@@ -13,7 +13,9 @@ export const Navbar: React.FC = () => {
     { label: 'How It Works', href: '#how-it-works' },
     { label: 'Conditions', href: '#conditions-treated' },
     { label: 'About', href: '#about' },
-    { label: 'Stage-based rehab', href: '#role-of-pmr' },
+    { label: 'What is PMR', href: '#what-is-pmr' },
+    { label: 'Who it’s for', href: '#who-its-for' },
+    { label: 'Stages', href: '#role-of-pmr' },
     { label: 'Pricing', href: '#pricing' },
     { label: 'Insights', href: '#dynamic-blogs' },
   ];
