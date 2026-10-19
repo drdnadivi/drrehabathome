@@ -5,12 +5,12 @@ import {
   Brain,
   HeartPulse,
   Users,
-  Bone,
   Activity,
-  Baby,
   Dumbbell,
   Hand,
   Stethoscope,
+  Wind,
+  Layers,
 } from 'lucide-react';
 
 /** Who it's for — broader than 3 diseases, short labels */
