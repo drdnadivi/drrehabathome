@@ -79,6 +79,9 @@ export const BookAssessmentModal: React.FC = () => {
             </span>
           </div>
           <h2 className="text-xl font-bold">Service enquiry — home rehabilitation</h2>
+          <p className="text-[11px] text-slate-500 leading-relaxed mt-3 px-1">
+            Home therapy is not an emergency service. If a serious problem occurs during a session, seek ambulance/hospital care immediately, then inform us on +91 73736 38970.
+          </p>
           <p className="text-xs text-slate-300 mt-1">
             Every session outcome is evaluated by our Physical Medicine & Rehabilitation (PMR) doctors.
           </p>

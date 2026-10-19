@@ -132,6 +132,7 @@ export const CostCalculatorSection: React.FC = () => {
           </div>
         </div>
       </div>
+    <p className="text-center text-[12px] text-slate-600 max-w-xl mx-auto mt-6 px-4 border border-amber-100 bg-amber-50/50 rounded-xl py-3">Please note: Your first detailed assessment visit and therapy session schedule is activated only after the package payment is completed.</p>
     </section>
   );
 };

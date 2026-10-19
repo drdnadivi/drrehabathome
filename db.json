@@ -19,7 +19,7 @@
       "credentials": "MD (PMR)",
       "registrationNo": "",
       "avatar": "/dr-dharshan.jpg",
-      "bio": "Founder & Lead Physiatrist \u2014 DrRehab at Home."
+      "bio": "Founder & Lead Physiatrist — DrRehab at Home."
     },
     {
       "id": "usr-staff-1",
@@ -37,6 +37,81 @@
   "patients": [],
   "sessions": [],
   "exercises": [],
-  "blogs": [],
+  "blogs": [
+    {
+      "id": "blog-tkr-stages-001",
+      "slug": "stage-based-rehab-after-knee-replacement",
+      "title": "Stage-based rehab after knee replacement",
+      "category": "Ortho Recovery",
+      "readTime": "4 min read",
+      "publishedAt": "2026-10-19",
+      "author": {
+        "name": "Dr. Dharshan N A, MD (PMR)",
+        "title": "Physical Medicine & Rehabilitation",
+        "avatar": "/dr-dharshan.jpg"
+      },
+      "coverImage": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=80",
+      "summary": "Why week 1 after TKR is not the same as week 6 — and how a stage-based home protocol is reviewed.",
+      "content": "After knee replacement, recovery is not one fixed exercise list.\n\nEarly days often focus on swelling, safe walking, and regaining extension. Later weeks usually shift toward strength, stairs, and endurance. Pushing the wrong focus too early — or staying too cautious too long — can slow progress.\n\nA stage-based home programme matches the plan to the current phase and is reviewed weekly so goals and exercises can change as you improve.\n\nThis article is general education. Your surgeon’s advice and your own assessment decide what is safe for you. Individual results vary.",
+      "tags": [
+        "Knee",
+        "TKR",
+        "Home rehab",
+        "PMR"
+      ],
+      "views": 12,
+      "featured": true,
+      "comments": []
+    },
+    {
+      "id": "blog-stroke-shoulder-002",
+      "slug": "stroke-early-phase-and-shoulder-care",
+      "title": "Stroke: early phase and shoulder care",
+      "category": "Neuro Rehab",
+      "readTime": "4 min read",
+      "publishedAt": "2026-10-19",
+      "author": {
+        "name": "Dr. Dharshan N A, MD (PMR)",
+        "title": "Physical Medicine & Rehabilitation",
+        "avatar": "/dr-dharshan.jpg"
+      },
+      "coverImage": "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1200&q=80",
+      "summary": "Flaccid phase, shoulder protection, and why one stroke exercise sheet cannot fit every stage.",
+      "content": "Recovery after stroke often moves through different phases.\n\nIn an early flaccid phase, protecting the shoulder and careful positioning matter as much as “exercise.” Poor handling can increase the risk of shoulder problems such as subluxation.\n\nAs movement returns, the plan may shift toward useful control and function. Later, spasticity may need a different approach than the flaccid phase — including tone, task practice, and stage-appropriate methods.\n\nHome rehabilitation works best when the protocol matches the stage and is reviewed as the person changes.\n\nGeneral education only. Not a personal prescription. Individual results vary.",
+      "tags": [
+        "Stroke",
+        "Neuro",
+        "Shoulder",
+        "PMR"
+      ],
+      "views": 9,
+      "featured": true,
+      "comments": []
+    },
+    {
+      "id": "blog-weekly-review-003",
+      "slug": "why-weekly-protocol-review-matters",
+      "title": "Why weekly protocol review matters",
+      "category": "PMR & Physiatry",
+      "readTime": "3 min read",
+      "publishedAt": "2026-10-19",
+      "author": {
+        "name": "Dr. Dharshan N A, MD (PMR)",
+        "title": "Physical Medicine & Rehabilitation",
+        "avatar": "/dr-dharshan.jpg"
+      },
+      "coverImage": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1200&q=80",
+      "summary": "A home programme should change with progress — not stay frozen on day-one exercises.",
+      "content": "A printed sheet from day one rarely fits the whole recovery journey.\n\nWhat is right in week 1 is often not right in week 6. Weekly review lets the care team update intensity, goals, and precautions based on how you are actually progressing.\n\nAt DrRehab@Home, home rehabilitation is organised around stage-based protocols and regular review. Physiotherapy is central; occupational therapy and speech therapy may be included when needed and available. Physician (PMR) input may be part of the review cycle where applicable.\n\nThis is general information about process — not a guarantee of outcome. Assessment is required before a personal plan.",
+      "tags": [
+        "Weekly review",
+        "Protocols",
+        "Home rehab"
+      ],
+      "views": 7,
+      "featured": false,
+      "comments": []
+    }
+  ],
   "bookings": []
 }

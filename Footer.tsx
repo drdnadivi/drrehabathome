@@ -13,10 +13,7 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
           <div>
             <BrandLogo variant="dark" />
-            <p className="text-[13px] text-slate-400 leading-relaxed mb-4">
-              
-            </p>
-            <div className="inline-flex items-center gap-2 text-[12px] text-teal-300 font-medium bg-slate-800/80 px-3 py-2 rounded-lg border border-slate-700">
+            <div className="inline-flex items-center gap-2 text-[12px] text-teal-300 font-medium bg-slate-800/80 px-3 py-2 rounded-lg border border-slate-700 mt-3">
               <ShieldCheck className="w-4 h-4 shrink-0" />
               Clinical portals via secure sign-in
             </div>
@@ -25,11 +22,11 @@ export const Footer: React.FC = () => {
           <div>
             <h4 className="text-[12px] font-semibold text-white uppercase tracking-wider mb-3">Care</h4>
             <ul className="space-y-2 text-[13px] text-slate-400">
-              <li><a href="#conditions-treated" className="hover:text-teal-300 transition">Conditions</a></li>
+              <li><a href="#who-its-for" className="hover:text-teal-300 transition">Who it&apos;s for</a></li>
+              <li><a href="#conditions-treated" className="hover:text-teal-300 transition">Pathways</a></li>
               <li><a href="#how-it-works" className="hover:text-teal-300 transition">How it works</a></li>
-              <li><a href="#about" className="hover:text-teal-300 transition">Role of PMR</a></li>
-              <li><a href="#pricing" className="hover:text-teal-300 transition">Pricing</a></li>
-              <li><a href="#dynamic-blogs" className="hover:text-teal-300 transition">Insights</a></li>
+              <li><a href="#about" className="hover:text-teal-300 transition">About</a></li>
+              <li><a href="#dynamic-blogs" className="hover:text-teal-300 transition">Clinical notes</a></li>
             </ul>
           </div>
 
@@ -46,6 +43,11 @@ export const Footer: React.FC = () => {
                   Patient progress login
                 </button>
               </li>
+              <li>
+                <button type="button" onClick={() => openModal('privacy')} className="hover:text-teal-300 transition text-left cursor-pointer">
+                  Privacy policy
+                </button>
+              </li>
             </ul>
           </div>
 
@@ -55,13 +57,16 @@ export const Footer: React.FC = () => {
               <div className="flex items-start gap-2">
                 <Phone className="w-4 h-4 text-teal-400 shrink-0 mt-0.5" />
                 <div>
-                  <div className="text-white font-medium">Phone / WhatsApp</div>
-                  <a href="https://wa.me/917373638970" className="text-teal-300 hover:text-teal-200" target="_blank" rel="noreferrer">+91 73736 38970</a>
+                  <div className="text-white font-medium text-[12px]">Phone / WhatsApp</div>
+                  <a href={`https://wa.me/917373638970`} className="text-teal-300 hover:text-teal-200" target="_blank" rel="noreferrer">{DISPLAY_PHONE}</a>
                 </div>
               </div>
-              <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-teal-400 shrink-0" />
-                <a href="mailto:n.adharshan@gmail.com" className="hover:text-teal-300">n.adharshan@gmail.com</a>
+              <div className="flex items-start gap-2">
+                <Mail className="w-4 h-4 text-teal-400 shrink-0 mt-0.5" />
+                <div>
+                  <div className="text-white font-medium text-[12px]">Email</div>
+                  <a href={`mailto:${CARE_EMAIL}`} className="text-teal-300 hover:text-teal-200">{CARE_EMAIL}</a>
+                </div>
               </div>
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-teal-400 shrink-0 mt-0.5" />
@@ -78,15 +83,29 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="pt-6 border-t border-slate-800 text-[12px] text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="text-[11px] text-slate-500 leading-relaxed max-w-3xl">
-            <p className="font-medium text-slate-400 mb-1">Practitioner information (for patient reference)</p>
-            <p>{RMP_NAME}, {RMP_QUALIFICATION}</p>
-            <p>{RMP_REGISTRATION}</p>
-            <p className="mt-2 text-slate-500">Information on this website is general and factual. Individual care plans require clinical assessment. Outcomes vary. Associated for clinical oversight of rehabilitation pathways.</p>
+        <div className="pt-6 border-t border-slate-800 space-y-4 text-[11px] text-slate-500 leading-relaxed">
+          <div>
+            <p className="font-semibold text-slate-400 mb-1">Medical disclaimer</p>
+            <p>
+              This website is for general information and recovery estimates only. It is not a substitute for any medical emergency or direct treatment by a doctor in a hospital. Actual results may vary depending on the patient&apos;s physical condition.
+            </p>
           </div>
-          <div>© {new Date().getFullYear()} DrRehab@Home. Home rehabilitation information · Bengaluru.</div>
-          <div>Clinical information · Not a substitute for emergency care</div>
+          <div>
+            <p className="font-semibold text-slate-400 mb-1">Emergency during a home session</p>
+            <p>
+              If a serious medical problem occurs during therapy at home, stop the session and seek emergency care immediately (call local emergency services / ambulance, or go to the nearest hospital). Then inform DrRehab@Home on {DISPLAY_PHONE}. Home therapy is not an emergency service.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 pt-2">
+            <div>
+              <p className="font-semibold text-slate-400 mb-1">Practitioner information</p>
+              <p className="text-slate-400">{RMP_NAME} · {RMP_QUALIFICATION}</p>
+              <p className="text-slate-400">{RMP_REGISTRATION}</p>
+            </div>
+            <div className="text-slate-500">
+              © {new Date().getFullYear()} DrRehab@Home · Bengaluru
+            </div>
+          </div>
         </div>
       </div>
     </footer>

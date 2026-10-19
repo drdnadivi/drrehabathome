@@ -19,6 +19,7 @@ import { BaselineAssessmentModal } from './BaselineAssessmentModal';
 import { PrescribeToolsModal } from './PrescribeToolsModal';
 import { DocumentUploadModal } from './DocumentUploadModal';
 import { ToastContainer } from './ToastContainer';
+import { PrivacyPolicyModal } from './PrivacyPolicyModal';
 import { WhatsAppFloat } from './WhatsAppFloat';
 
 export const AppContent: React.FC = () => {
@@ -62,6 +63,7 @@ export const AppContent: React.FC = () => {
       <PrescribeToolsModal />
       <DocumentUploadModal />
       <ToastContainer />
+      <PrivacyPolicyModal />
       <WhatsAppFloat />
     </div>
   );

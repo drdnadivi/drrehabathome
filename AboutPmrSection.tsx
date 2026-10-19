@@ -14,7 +14,7 @@ export const AboutPmrSection: React.FC = () => {
               How we plan care
             </h2>
             <p className="text-[15px] text-slate-600 mt-4 leading-relaxed">
-              We focus on structured home rehabilitation: what is right in week 1 is often not right in week 6. That is the core of how we plan care.
+              We focus on structured home rehabilitation: what is right in week 1 is often not right in week 6. That is the core of how we plan care. Pathways use a PMR lens with milestone-style review — scientific process, not patient testimonials.
             </p>
 
             <div className="mt-6 flex flex-wrap items-center gap-2 text-[12px] font-medium text-slate-600">
@@ -47,6 +47,7 @@ export const AboutPmrSection: React.FC = () => {
                 <p className="text-[16px] font-bold text-slate-900 mt-0.5">Dr. Dharshan N A</p>
                 <p className="text-[13px] text-slate-600 mt-1">MBBS</p>
                 <p className="text-[13px] text-teal-800 font-medium mt-0.5">MD (Physical Medicine &amp; Rehabilitation)</p>
+                <p className="text-[12px] text-slate-500 mt-1">KMC 180734</p>
               </div>
             </div>
             <ul className="mt-4 space-y-2 text-[13px] text-slate-600">

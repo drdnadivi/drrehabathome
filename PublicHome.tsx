@@ -6,9 +6,11 @@ import { WorkflowSection } from './WorkflowSection';
 import { SpecialtiesSection } from './SpecialtiesSection';
 import { ConditionsTreatedSection } from './ConditionsTreatedSection';
 import { UspPmrSection } from './UspPmrSection';
+import { CaseExamplesSection } from './CaseExamplesSection';
 import { ServiceAreasSection } from './ServiceAreasSection';
 import { DynamicBlogsSection } from './DynamicBlogsSection';
 import { CostCalculatorSection } from './CostCalculatorSection';
+import { RecoveryEvidenceSection } from './RecoveryEvidenceSection';
 import { useApp } from './AppContext';
 import { Calendar, ShieldCheck } from 'lucide-react';
 
@@ -24,7 +26,9 @@ export const PublicHome: React.FC = () => {
       <SpecialtiesSection />
       <ConditionsTreatedSection />
       <UspPmrSection />
+      <CaseExamplesSection />
       <ServiceAreasSection />
+      <RecoveryEvidenceSection />
       <CostCalculatorSection />
       <DynamicBlogsSection />
 
