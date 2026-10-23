@@ -41,7 +41,9 @@ export const Navbar: React.FC = () => {
         <div className="flex items-center justify-between h-[4.25rem]">
           
           {/* Logo */}
-          <BrandLogo onClick={() => switchRole('public')} />
+          <div className="shrink-0 max-w-[55%] sm:max-w-none overflow-visible">
+            <BrandLogo onClick={() => switchRole('public')} showTagline={false} />
+          </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-1">
