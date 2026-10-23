@@ -8,7 +8,7 @@ type Props = {
   className?: string;
 };
 
-/** Inline SVG symbol so logo never breaks if PNG is missing on host */
+/** Inline SVG symbol + wordmark + tagline */
 export const BrandLogo: React.FC<Props> = ({
   variant = 'light',
   size = 'md',
@@ -26,14 +26,14 @@ export const BrandLogo: React.FC<Props> = ({
 
   return (
     <div
-      className={`flex items-center gap-2.5 shrink-0 min-w-0 ${onClick ? 'cursor-pointer group' : ''} ${className}`}
+      className={`flex items-center gap-2.5 shrink-0 ${onClick ? 'cursor-pointer group' : ''} ${className}`}
       onClick={onClick}
       role={onClick ? 'button' : undefined}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 512 512"
-        className={`${box} shrink-0 rounded-lg bg-white`}
+        className={`${box} shrink-0 rounded-lg`}
         role="img"
         aria-label="DrRehab@Home"
       >
@@ -47,13 +47,13 @@ export const BrandLogo: React.FC<Props> = ({
         </g>
         <circle cx="256" cy="242" r="25" fill={dot} />
       </svg>
-      <div className="leading-tight min-w-0">
+      <div className="leading-tight">
         <div className={`${title} font-bold tracking-tight ${titleColor} whitespace-nowrap`}>
           DrRehab<span className={atColor}>@</span>Home
         </div>
         {showTagline && (
-          <p className={`text-[10px] font-medium ${tagColor} tracking-wide whitespace-nowrap hidden xs:block sm:block`}>
-            Stage-based home rehab
+          <p className={`text-[10px] sm:text-[11px] font-medium ${tagColor} tracking-wide whitespace-nowrap`}>
+            Doctor-led rehab at home
           </p>
         )}
       </div>

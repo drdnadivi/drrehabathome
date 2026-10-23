@@ -42,7 +42,7 @@ export const Navbar: React.FC = () => {
           
           {/* Logo */}
           <div className="shrink-0 max-w-[55%] sm:max-w-none overflow-visible">
-            <BrandLogo onClick={() => switchRole('public')} showTagline={false} />
+            <BrandLogo onClick={() => switchRole('public')} showTagline={true} />
           </div>
 
           {/* Desktop Navigation */}
